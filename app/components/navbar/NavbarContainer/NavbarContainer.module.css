@@ -1,0 +1,5 @@
+.container {
+  @apply flex flex-row items-center justify-between gap-3 md:gap-0
+  max-w-[2520px] mx-auto  
+  px-4 sm:px-2 md:px-10 xl:px-20;
+}
