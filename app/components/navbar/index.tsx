@@ -4,15 +4,20 @@ import Logo from "./Logo";
 import SearchArea from "./SearchArea";
 import UserMenu from "./UserMenu";
 import style from "./index.module.css";
+import { User } from "@prisma/client";
 const { wrapper } = style;
 
-const Navbar = () => {
+interface NavbarProps {
+  currentUser: User | null;
+}
+
+const Navbar = ({ currentUser }: NavbarProps) => {
   return (
     <div className={wrapper}>
       <NavbarContainer>
         <Logo />
         <SearchArea />
-        <UserMenu />
+        <UserMenu currentUser={currentUser} />
       </NavbarContainer>
     </div>
   );
