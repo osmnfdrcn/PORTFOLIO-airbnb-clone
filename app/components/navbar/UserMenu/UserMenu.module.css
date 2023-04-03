@@ -7,23 +7,43 @@
 }
 
 .airBnbYourHome {
-  @apply hidden md:block text-sm font-semibold py-3 px-4 rounded-full transition cursor-pointer hover:bg-neutral-100;
+  @apply hidden md:block 
+  text-sm font-semibold 
+  py-3 px-4 
+  rounded-full 
+  transition 
+  cursor-pointer hover:bg-neutral-100;
 }
 .languageIcon {
-  @apply hidden md:block hover:bg-neutral-100 cursor-pointer py-3 px-3 rounded-full transition;
+  @apply hidden md:block 
+  hover:bg-neutral-100 cursor-pointer 
+  py-3 px-3 rounded-full 
+  transition;
 }
 
-.userMenuIcon {
-  @apply p-4 md:py-1 md:px-2 border-neutral-200 flex flex-row items-center gap-3 rounded-full cursor-pointer transition hover:shadow-md;
+.userMenuIcons {
+  @apply flex flex-row items-center gap-3 
+  p-4 md:py-1 md:px-2 
+  border-neutral-200 
+  rounded-full cursor-pointer hover:shadow-md
+  transition;
 }
 
 .userMenuWrapper {
-  @apply absolute rounded-xl shadow-md w-[40vw] md:w-3/4 bg-white overflow-hidden top-12 text-sm right-0 flex flex-col cursor-pointer;
+  @apply absolute top-12 right-0
+  flex flex-col 
+  bg-white 
+  w-[40vw] md:w-3/4 
+  rounded-xl 
+  shadow-md 
+  overflow-hidden
+  text-sm  
+  cursor-pointer;
 }
 
 .userMenuItem {
   @apply px-4 py-3 
   hover:bg-neutral-100  
-  transition 
-  font-semibold;
+  font-semibold
+  transition;
 }

@@ -8,7 +8,15 @@ type Props = {};
 
 const Logo = (props: Props) => {
   const router = useRouter();
-  return <Image className={style.logoImage} src={"/images/logo.png"} width={100} height={100} alt="airbnb logo" />;
+  return (
+    <Image
+      className={style.logoImage}
+      src={"/images/logo.png"}
+      width={100}
+      height={100}
+      alt="airbnb logo"
+    />
+  );
 };
 
 export default Logo;
