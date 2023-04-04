@@ -2,6 +2,7 @@
 import useLoginModal from "@/app/hooks/useLoginModal";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
 import useToggle from "@/app/hooks/useToggle";
+import { SafeUser } from "@/app/types";
 import { User } from "@prisma/client";
 import { signOut } from "next-auth/react";
 import { AiOutlineMenu } from "react-icons/ai";
@@ -21,12 +22,13 @@ const {
 } = style;
 
 interface UserMenuProps {
-  currentUser: User | null;
+  currentUser: SafeUser | null;
 }
 const UserMenu = ({ currentUser }: UserMenuProps) => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useToggle(false);
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
+  console.log(currentUser?.image);
 
   return (
     <div className={container}>
@@ -40,7 +42,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
         <div className={userMenuIcons} onClick={setIsUserMenuOpen}>
           <AiOutlineMenu />
           <div className="hidden md:block">
-            <Avatar />
+            <Avatar image={currentUser?.image as string} />
           </div>
         </div>
       </div>

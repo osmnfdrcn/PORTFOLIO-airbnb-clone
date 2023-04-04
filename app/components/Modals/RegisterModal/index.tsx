@@ -12,6 +12,7 @@ import FormInput from "../../inputs/FormInput";
 import Modal from "../Modal";
 import { yupResolver } from "@hookform/resolvers/yup";
 import RegisterModalSchema from "./RegisterModalSchema";
+import { signIn } from "next-auth/react";
 
 const RegisterModal = () => {
   const registerModal = useRegisterModal();
@@ -94,13 +95,13 @@ const RegisterModal = () => {
         outline
         text="Continue with Google"
         icon={FcGoogle}
-        onClick={() => {}}
+        onClick={() => signIn("google")}
       />
       <Button
         outline
         text="Continue with Github"
         icon={AiFillGithub}
-        onClick={() => {}}
+        onClick={() => signIn("github")}
       />
       <div
         className="

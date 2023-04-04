@@ -3,11 +3,17 @@ import Image from "next/image";
 
 import style from "./Avatar.module.css";
 
-const Avatar = () => {
+interface AvatarProps {
+  image?: string;
+}
+
+const Avatar = ({ image }: AvatarProps) => {
+  console.log(image);
+
   const { logoImage } = style;
   return (
     <Image
-      src="/images/avatar.jpg"
+      src={image || "/images/avatar.jpg"}
       className={logoImage}
       width="30"
       height="30"
