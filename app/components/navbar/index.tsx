@@ -17,7 +17,7 @@ const Navbar = ({ currentUser }: NavbarProps) => {
       <NavbarContainer>
         <Logo />
         <SearchArea />
-        <UserMenu currentUser={currentUser!} />
+        <UserMenu currentUser={currentUser} />
       </NavbarContainer>
     </div>
   );
