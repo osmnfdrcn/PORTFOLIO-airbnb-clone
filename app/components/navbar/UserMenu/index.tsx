@@ -22,7 +22,7 @@ const {
 } = style;
 
 interface UserMenuProps {
-  currentUser: SafeUser | null;
+  currentUser?: SafeUser | null;
 }
 const UserMenu = ({ currentUser }: UserMenuProps) => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useToggle(false);

@@ -4,11 +4,11 @@ import Logo from "./Logo";
 import SearchArea from "./SearchArea";
 import UserMenu from "./UserMenu";
 import style from "./index.module.css";
-import { User } from "@prisma/client";
+import { SafeUser } from "@/app/types";
 const { wrapper } = style;
 
 interface NavbarProps {
-  currentUser: User | null;
+  currentUser?: SafeUser | null;
 }
 
 const Navbar = ({ currentUser }: NavbarProps) => {
@@ -17,7 +17,7 @@ const Navbar = ({ currentUser }: NavbarProps) => {
       <NavbarContainer>
         <Logo />
         <SearchArea />
-        <UserMenu currentUser={currentUser} />
+        <UserMenu currentUser={currentUser!} />
       </NavbarContainer>
     </div>
   );
