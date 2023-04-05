@@ -10,17 +10,6 @@ import { TbWorld } from "react-icons/tb";
 
 import Avatar from "../../common/Avatar";
 
-import style from "./UserMenu.module.css";
-const {
-  container,
-  flexWrapper,
-  airBnbYourHome,
-  languageIcon,
-  userMenuIcons,
-  userMenuWrapper,
-  userMenuItem,
-} = style;
-
 interface UserMenuProps {
   currentUser?: SafeUser | null;
 }
@@ -31,15 +20,32 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
   console.log(currentUser?.image);
 
   return (
-    <div className={container}>
-      <div className={flexWrapper}>
-        <div className={airBnbYourHome} onClick={() => {}}>
+    <div className="relative">
+      <div className="flex flex-row items-center gap-3">
+        <div
+          className="
+            hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
+          onClick={() => {}}
+        >
           Airbnb your home
         </div>
-        <div className={languageIcon}>
-          <TbWorld size={16} />
+        <div
+          className="
+            py-3 px-3 
+            rounded-full 
+            hover:bg-neutral-100 
+            transition cursor-pointer"
+        >
+          <TbWorld size={20} />
         </div>
-        <div className={userMenuIcons} onClick={setIsUserMenuOpen}>
+        <div
+          className="
+            p-4 md:py-1 md:px-2
+            border-[1px] rounded-full  border-neutral-200 
+            flex flex-row items-center gap-3 
+            cursor-pointer hover:shadow-md transition"
+          onClick={setIsUserMenuOpen}
+        >
           <AiOutlineMenu />
           <div className="hidden md:block">
             <Avatar image={currentUser?.image as string} />
@@ -47,7 +53,13 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
         </div>
       </div>
       {isUserMenuOpen && (
-        <div className={userMenuWrapper}>
+        <div
+          className="
+            absolute right-0 top-12
+            w-[40vw] md:w-3/4 bg-white text-sm
+            rounded-xl shadow-md
+            overflow-hidden"
+        >
           {currentUser ? (
             <>
               <MenuItem label="My trips" onClick={loginModal.onOpen} />
@@ -78,7 +90,13 @@ interface MenuItemProps {
 
 export const MenuItem = ({ onClick, label }: MenuItemProps) => {
   return (
-    <div className={userMenuItem} onClick={onClick}>
+    <div
+      className="px-4 py-3 
+      hover:bg-neutral-100 
+      transition
+      font-semibold"
+      onClick={onClick}
+    >
       {label}
     </div>
   );

@@ -1,8 +1,0 @@
-.wrapper {
-  @apply fixed 
-  w-full 
-  bg-white 
-  px-10 py-4 
-  border-b-[1px]
-  shadow-sm;
-}

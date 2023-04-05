@@ -105,10 +105,8 @@ const RegisterModal = () => {
       />
       <div
         className="
-          text-neutral-500 
-          text-center 
+          text-neutral-500 text-center font-light
           mt-4 
-          font-light
         "
       >
         <p>
@@ -121,7 +119,6 @@ const RegisterModal = () => {
               hover:underline
             "
           >
-            {" "}
             Log in
           </span>
         </p>

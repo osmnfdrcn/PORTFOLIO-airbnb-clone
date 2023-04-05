@@ -1,8 +1,6 @@
 "use client";
 import Image from "next/image";
 
-import style from "./Avatar.module.css";
-
 interface AvatarProps {
   image?: string;
 }
@@ -10,11 +8,10 @@ interface AvatarProps {
 const Avatar = ({ image }: AvatarProps) => {
   console.log(image);
 
-  const { logoImage } = style;
   return (
     <Image
       src={image || "/images/avatar.jpg"}
-      className={logoImage}
+      className="rounded-full"
       width="30"
       height="30"
       alt="avatar"

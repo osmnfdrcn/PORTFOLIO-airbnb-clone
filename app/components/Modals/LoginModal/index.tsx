@@ -96,10 +96,8 @@ const LoginModal = () => {
       />
       <div
         className="
-          text-neutral-500 
-          text-center 
+          text-neutral-500 text-center font-light
           mt-4 
-          font-light
         "
       >
         <p>
@@ -112,7 +110,6 @@ const LoginModal = () => {
               hover:underline
             "
           >
-            {" "}
             Log in
           </span>
         </p>
