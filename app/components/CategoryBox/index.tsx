@@ -28,7 +28,6 @@ const CategoryBox = ({ icon: Icon, label, selected }: CategoryBoxProps) => {
       { url: "/", query: updatedQuery },
       { skipNull: true }
     );
-    console.log({ url });
 
     router.push(url);
   }, [label, router, params]);
