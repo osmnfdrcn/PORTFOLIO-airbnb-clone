@@ -1,7 +1,7 @@
 "use client";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
 import axios from "axios";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { AiFillGithub } from "react-icons/ai";
@@ -13,9 +13,11 @@ import Modal from "../Modal";
 import { yupResolver } from "@hookform/resolvers/yup";
 import RegisterModalSchema from "./RegisterModalSchema";
 import { signIn } from "next-auth/react";
+import useLoginModal from "@/app/hooks/useLoginModal";
 
 const RegisterModal = () => {
   const registerModal = useRegisterModal();
+  const loginModal = useLoginModal();
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -32,9 +34,13 @@ const RegisterModal = () => {
     resolver: yupResolver(RegisterModalSchema),
   });
 
+  const onToggle = useCallback(() => {
+    registerModal.onClose();
+    loginModal.onOpen();
+  }, [registerModal, loginModal]);
+
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     console.log(data);
-
     setIsLoading(true);
     const { name, email, password } = data;
     axios
@@ -105,23 +111,22 @@ const RegisterModal = () => {
       />
       <div
         className="
+          flex items-center justify-center gap-2
           text-neutral-500 text-center font-light
           mt-4 
         "
       >
-        <p>
-          Already have an account?
-          <span
-            onClick={() => registerModal.onClose()}
-            className="
+        <p>Already have an account?</p>
+        <span
+          onClick={onToggle}
+          className="
               text-neutral-800
               cursor-pointer 
               hover:underline
             "
-          >
-            Log in
-          </span>
-        </p>
+        >
+          Log in
+        </span>
       </div>
     </div>
   );

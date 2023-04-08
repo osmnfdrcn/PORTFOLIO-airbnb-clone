@@ -4,7 +4,7 @@ import useRegisterModal from "@/app/hooks/useRegisterModal";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { AiFillGithub } from "react-icons/ai";
@@ -32,6 +32,11 @@ const LoginModal = () => {
     },
     resolver: yupResolver(RegisterModalSchema),
   });
+
+  const onToggle = useCallback(() => {
+    loginModal.onClose();
+    registerModal.onOpen();
+  }, [loginModal, registerModal]);
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
@@ -96,23 +101,22 @@ const LoginModal = () => {
       />
       <div
         className="
+          flex items-center justify-center gap-2
           text-neutral-500 text-center font-light
           mt-4 
         "
       >
-        <p>
-          Already have an account?
-          <span
-            onClick={() => registerModal.onClose()}
-            className="
+        <div>First time using Airbnb?</div>
+        <div
+          onClick={onToggle}
+          className="
               text-neutral-800
               cursor-pointer 
               hover:underline
             "
-          >
-            Log in
-          </span>
-        </p>
+        >
+          Create an account!
+        </div>
       </div>
     </div>
   );

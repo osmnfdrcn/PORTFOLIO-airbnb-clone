@@ -54,7 +54,6 @@ const Modal = (props: ModalProps) => {
 
   const handleSecondaryAction = useCallback(() => {
     if (disabled || !secondaryAction) return;
-    setShowModal(false);
     secondaryAction();
   }, [disabled, secondaryAction]);
 

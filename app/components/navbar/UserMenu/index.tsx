@@ -1,10 +1,12 @@
 "use client";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
+import useRentModal from "@/app/hooks/useRentModal";
 import useToggle from "@/app/hooks/useToggle";
 import { SafeUser } from "@/app/types";
 import { User } from "@prisma/client";
 import { signOut } from "next-auth/react";
+import { useCallback } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { TbWorld } from "react-icons/tb";
 
@@ -17,15 +19,24 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useToggle(false);
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
+  const rentModal = useRentModal();
   console.log(currentUser?.image);
+  console.log(rentModal.isOpen);
+
+  const onRent = useCallback(() => {
+    if (!currentUser) {
+      return loginModal.onOpen();
+    }
+    rentModal.onOpen();
+  }, [loginModal, rentModal, currentUser]);
 
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
         <div
+          onClick={onRent}
           className="
             hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
-          onClick={() => {}}
         >
           Airbnb your home
         </div>
