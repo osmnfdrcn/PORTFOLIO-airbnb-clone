@@ -6,8 +6,6 @@ interface AvatarProps {
 }
 
 const Avatar = ({ image }: AvatarProps) => {
-  console.log(image);
-
   return (
     <Image
       src={image || "/images/avatar.jpg"}

@@ -27,8 +27,8 @@ const attribution =
 const Map = ({ center }: MapProps) => {
   return (
     <MapContainer
-      center={(center as L.LatLngExpression) || [39.91987, 32.85427]}
-      zoom={center ? 4 : 2}
+      center={center as L.LatLngExpression}
+      zoom={center ? 7 : 2}
       scrollWheelZoom={false}
       className="h-[35vh] rounded-lg"
     >

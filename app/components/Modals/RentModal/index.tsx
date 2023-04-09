@@ -1,23 +1,18 @@
 "use client";
 import { categories } from "@/app/constants/categoryList";
 import useRentModal from "@/app/hooks/useRentModal";
-import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import Button from "../../common/Button";
 import Heading from "../../common/Heading";
 import CategoryInput from "../../inputs/CategoryInput";
 import Counter from "../../inputs/Counter";
 import FormInput from "../../inputs/FormInput";
 import ImageUpload from "../../inputs/ImageUpload";
-import CitySelect, {
-  CitySelectValue,
-} from "../../inputs/LocationSelect/CitySelect";
-import CountrySelect from "../../inputs/LocationSelect/CountrySelect";
-import StateSelect from "../../inputs/LocationSelect/StateSelect.";
 import Modal from "../Modal";
 
 enum STEPS {
@@ -28,13 +23,17 @@ enum STEPS {
   DESCRIPTION = 4,
   PRICE = 5,
 }
+const NOMINATIM_BASE_URL = "https://nominatim.openstreetmap.org/search?";
 
 const RentModal = () => {
   const rentModal = useRentModal();
   const router = useRouter();
-
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(STEPS.CATEGORY);
+  const [selectPosition, setSelectPosition] = useState(null);
+  const [searchText, setSearchText] = useState("");
+  const [listPlace, setListPlace] = useState([]);
+  console.log({ selectPosition });
 
   const {
     register,
@@ -46,9 +45,7 @@ const RentModal = () => {
   } = useForm<FieldValues>({
     defaultValues: {
       category: "",
-      country: null,
-      state: null,
-      city: null,
+      location: null,
       guestCount: 1,
       roomCount: 1,
       bathroomCount: 1,
@@ -60,11 +57,9 @@ const RentModal = () => {
   });
 
   const category = watch("category");
-  const country = watch("country");
-  const state = watch("state");
-  const city = watch("city");
+  const location = watch("location");
   const guestCount = watch("guestCount");
-  const bathroomCount = watch("bathroomCount ");
+  const bathroomCount = watch("bathroomCount");
   const roomCount = watch("roomCount");
   const imageSrc = watch("imageSrc");
 
@@ -73,7 +68,7 @@ const RentModal = () => {
       dynamic(() => import("../../Map"), {
         ssr: false,
       }),
-    [city]
+    [location]
   );
 
   const setCustomValue = (id: string, value: any) => {
@@ -88,6 +83,8 @@ const RentModal = () => {
   const onNext = () => setStep((prev) => prev + 1);
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    console.log({ data });
+
     if (step !== STEPS.PRICE) {
       return onNext();
     }
@@ -111,20 +108,15 @@ const RentModal = () => {
       });
   };
 
-  const actionLabel = useMemo(() => {
-    if (step === STEPS.PRICE) {
-      return "Create";
-    }
-    return "Next";
-  }, [step]);
+  const actionLabel = useMemo(
+    () => (step === STEPS.PRICE ? "Create" : "Next"),
+    [step]
+  );
 
-  const secondaryActionLabel = useMemo(() => {
-    if (step === STEPS.CATEGORY) {
-      return undefined;
-    }
-
-    return "Back";
-  }, [step]);
+  const secondaryActionLabel = useMemo(
+    () => (step === STEPS.CATEGORY ? undefined : "Back"),
+    [step]
+  );
 
   let body = (
     <div className="flex flex-col gap-8">
@@ -152,43 +144,82 @@ const RentModal = () => {
   );
 
   if (step == STEPS.LOCATION) {
+    const params: {
+      q: string;
+      format: string;
+      addressdetails: string;
+      polygon_geojson: string;
+    } = {
+      q: searchText,
+      format: "json",
+      addressdetails: "1",
+      polygon_geojson: "0",
+    };
+
     body = (
       <div className="flex flex-col gap-8">
         <Heading
           title="Where is your place located?"
           subTitle="Help us to find your place!"
         />
-        <CountrySelect
-          countryValue={country}
-          onChange={(countryValue) => {
-            setCustomValue("country", countryValue);
-            setCustomValue("state", null);
-            setCustomValue("city", null);
-          }}
-        />
-        {country ? (
-          <StateSelect
-            country={country?.value}
-            stateValue={state}
-            onChange={(value: CitySelectValue) => {
-              setCustomValue("state", value);
-              setCustomValue("city", null);
-            }}
-          />
-        ) : null}
-        {state ? (
-          <CitySelect
-            countryCode={country?.value}
-            stateCode={state?.isoCode}
-            cityValue={city}
-            onChange={(value: CitySelectValue) => setCustomValue("city", value)}
-          />
-        ) : null}
-        {city ? (
-          <Map
-            center={[parseFloat(city?.latitude), parseFloat(city?.longitude)]}
-          />
-        ) : null}
+        <Map center={[location?.lat || 39.91987, location?.lon || 32.85427]} />
+        <p>{location?.display_name}</p>
+        <div className="flex gap-1">
+          <div className="w-4/5 ">
+            <input
+              className="
+              w-full p-2.5 
+              bg-white  font-light 
+              border-2 rounded-md outline-none"
+              value={searchText}
+              placeholder="enter your city or streetname"
+              onChange={(event) => {
+                setSearchText(event.target.value);
+              }}
+            />
+          </div>
+          <div className="w-1/5">
+            <Button
+              text="Search"
+              onClick={() => {
+                const queryString = new URLSearchParams(params).toString();
+                const requestOptions: { method: string; redirect: string } = {
+                  method: "GET",
+                  redirect: "follow",
+                };
+                axios(
+                  `${NOMINATIM_BASE_URL}${queryString}`,
+                  requestOptions
+                ).then((response) => setListPlace(response.data));
+              }}
+            />
+          </div>
+        </div>
+
+        <div
+          className={`
+          absolute top-0 left-0 right-0 z-10 
+          flex flex-col gap-4  
+          bg-white p-4 text-sm text-neutral-400 
+          ${listPlace.length ? "h-full " : null} `}
+        >
+          {listPlace.map((item: any) => {
+            return (
+              <p
+                key={item?.place_id}
+                className="hover:text-black cursor-pointer"
+                onClick={() => {
+                  setCustomValue("location", item);
+                  setSelectPosition(item);
+                  setListPlace([]);
+                  setSearchText("");
+                }}
+              >
+                {item?.display_name}
+              </p>
+            );
+          })}
+        </div>
       </div>
     );
   }
@@ -297,7 +328,11 @@ const RentModal = () => {
       onSubmit={handleSubmit(onSubmit)}
       secondaryActionText={secondaryActionLabel}
       secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
-      onClose={rentModal.onClose}
+      onClose={() => {
+        reset();
+        setStep(STEPS.CATEGORY);
+        rentModal.onClose();
+      }}
       body={body}
     />
   );

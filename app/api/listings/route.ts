@@ -19,13 +19,9 @@ export async function POST(request: Request) {
     roomCount,
     bathroomCount,
     guestCount,
-    country,
-    state,
-    city,
+    location,
     price,
   } = body;
-
-  console.log(country, state, city);
 
   Object.keys(body).forEach((value: any) => {
     if (!body[value]) {
@@ -42,7 +38,7 @@ export async function POST(request: Request) {
       roomCount,
       bathroomCount,
       guestCount,
-      locationValue: country.label + "/" + state.name + "/" + city.name,
+      locationValue: location.display_name,
       price: parseInt(price, 10),
       userId: currentUser.id,
     },

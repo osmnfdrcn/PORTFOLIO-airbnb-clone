@@ -6,7 +6,6 @@ import NotificationProvider from "./providers/NotificationProvider";
 import LoginModal from "./components/Modals/LoginModal";
 import { getCurrentUser } from "./actions/getCurrentUser";
 import RentModal from "./components/Modals/RentModal";
-import Cities from "./components/City";
 export const metadata = {
   title: "AIRBNB CLONE",
   description: "An AIRBNB Clone",
@@ -21,7 +20,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const currentUser = await getCurrentUser();
-  console.log(currentUser);
 
   return (
     <html lang="en">

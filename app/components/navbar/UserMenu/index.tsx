@@ -20,8 +20,6 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
   const rentModal = useRentModal();
-  console.log(currentUser?.image);
-  console.log(rentModal.isOpen);
 
   const onRent = useCallback(() => {
     if (!currentUser) {
