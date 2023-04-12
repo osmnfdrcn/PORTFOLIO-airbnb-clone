@@ -1,11 +1,11 @@
 import "./globals.css";
 import { Nunito } from "next/font/google";
-import Navbar from "./components/navbar";
-import RegisterModal from "./components/Modals/RegisterModal";
+import Navbar from "./components/ui/navbar";
+import RegisterModal from "./components/ui/modals/AuthModals/RegisterModal";
 import NotificationProvider from "./providers/NotificationProvider";
-import LoginModal from "./components/Modals/LoginModal";
-import { getCurrentUser } from "./actions/getCurrentUser";
-import AirbnbYourHomeModal from "./components/Modals/AirbnbYourHomeModal";
+import LoginModal from "./components/ui/modals/AuthModals/LoginModal";
+import { getCurrentUser } from "./utils/getCurrentUser";
+import AirbnbYourHomeModal from "./components/ui/modals/AirbnbYourHomeModal";
 export const metadata = {
   title: "AIRBNB CLONE",
   description: "An AIRBNB Clone",
