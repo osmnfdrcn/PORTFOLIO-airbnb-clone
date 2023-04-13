@@ -5,7 +5,10 @@ const PropertyImage = ({
   data,
   handleData,
   handleStep,
+  step,
 }: AirbnbYourHomeModalComponentsProps) => {
+  const handleBackClick = () => handleStep(--step);
+  const handleNextClick = () => handleStep(++step);
   return (
     <div className="flex flex-col gap-8">
       <Heading
@@ -20,10 +23,10 @@ const PropertyImage = ({
       />
       <div className="flex flex-col gap-2 p-6">
         <div className="flex flex-row items-center w-full gap-4">
-          <Button outline text="Back" onClick={() => handleStep(2)} />
+          <Button outline text="Back" onClick={handleBackClick} />
           <Button
             text="Next"
-            onClick={() => handleStep(4)}
+            onClick={handleNextClick}
             disabled={!data?.imageSrc}
           />
         </div>

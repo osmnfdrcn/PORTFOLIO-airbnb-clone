@@ -6,7 +6,13 @@ const Price = ({
   handleStep,
   handleSubmit,
   data,
+  step,
 }: AirbnbYourHomeModalComponentsProps) => {
+  const { title, description } = data;
+
+  const handleBackClick = () => handleStep(--step);
+
+  const isCreateButtonDisabled = !title || !description;
   return (
     <div className="flex flex-col gap-8">
       <>
@@ -18,17 +24,19 @@ const Price = ({
           placeholder="Price"
           type="number"
           required={true}
-          onChange={(e) => handleData({ ...data, description: e.target.value })}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            handleData({ ...data, price: +e.target.value })
+          }
           price={true}
         />
       </>
       <div className="flex flex-col gap-2 p-6">
         <div className="flex flex-row items-center w-full gap-4">
-          <Button outline text="Back" onClick={() => handleStep(3)} />
+          <Button outline text="Back" onClick={handleBackClick} />
           <Button
             text="Create"
             onClick={handleSubmit!}
-            disabled={!data?.title || !data?.description}
+            disabled={isCreateButtonDisabled}
           />
         </div>
       </div>

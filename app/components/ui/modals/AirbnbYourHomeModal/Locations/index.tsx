@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { useMemo, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { AirbnbYourHomeModalComponentsProps } from "..";
+// import Map from "../Map";
 
 const NOMINATIM_BASE_URL = "https://nominatim.openstreetmap.org/search?";
 
@@ -12,42 +13,62 @@ const Locations = ({
   handleData,
   data,
   handleStep,
+  step,
 }: AirbnbYourHomeModalComponentsProps) => {
   const [searchText, setSearchText] = useState("");
   const [listPlace, setListPlace] = useState([]);
   const [selectPosition, setSelectPosition] = useState<Location | null>(null);
   const { location } = data;
+  const handleBackClick = () => handleStep(--step);
+  const handleNextClick = () => handleStep(++step);
+
   const Map = useMemo(
     () =>
       dynamic(() => import("../Map"), {
         ssr: false,
+        loading: () => (
+          <div className="h-[35vh] rounded-lg bg-neutral-200">Loading...</div>
+        ), //find a better way to fix flickering
       }),
     [location]
   );
-  const params: {
-    q: string;
-    format: string;
-    addressdetails: string;
-    polygon_geojson: string;
-  } = {
-    q: searchText,
-    format: "json",
-    addressdetails: "1",
-    polygon_geojson: "0",
-  };
-  // fix any
-  const handleLocationClick = (item: Location) => {
+
+  const params = useMemo(
+    () => ({
+      q: searchText,
+      format: "json",
+      addressdetails: "1",
+      polygon_geojson: "0",
+    }),
+    [searchText]
+  );
+
+  const handleLocationClick = (item: Location): void => {
     handleData({ ...data, location: item });
     setSelectPosition(item);
     setListPlace([]);
     setSearchText("");
   };
+
+  const handleSearchClick = (): void => {
+    const queryString = new URLSearchParams(params).toString();
+    const requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+    axios(`${NOMINATIM_BASE_URL}${queryString}`, requestOptions).then(
+      (response) => setListPlace(response.data)
+    );
+  };
+
   return (
     <div className="flex flex-col gap-8">
       <Heading
         title="Where is your place located?"
         subTitle="Help us to find your place!"
       />
+
+      {/* fix flickering */}
       <Map
         center={[
           parseFloat(location?.lat!) || 39.91987,
@@ -65,20 +86,7 @@ const Locations = ({
           />
         </div>
         <div className="w-1/5">
-          <Button
-            narrow
-            text="Search"
-            onClick={() => {
-              const queryString = new URLSearchParams(params).toString();
-              const requestOptions: { method: string; redirect: string } = {
-                method: "GET",
-                redirect: "follow",
-              };
-              axios(`${NOMINATIM_BASE_URL}${queryString}`, requestOptions).then(
-                (response) => setListPlace(response.data)
-              );
-            }}
-          />
+          <Button narrow text="Search" onClick={handleSearchClick} />
         </div>
       </div>
 
@@ -110,10 +118,10 @@ const Locations = ({
       </div>
       <div className="flex flex-col gap-2 p-6">
         <div className="flex flex-row items-center w-full gap-4">
-          <Button outline text="Back" onClick={() => handleStep(0)} />
+          <Button outline text="Back" onClick={handleBackClick} />
           <Button
             text="Next"
-            onClick={() => handleStep(2)}
+            onClick={handleNextClick}
             disabled={!location?.display_name}
           />
         </div>

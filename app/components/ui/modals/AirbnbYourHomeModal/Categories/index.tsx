@@ -7,7 +7,10 @@ const Categories = ({
   handleData,
   handleStep,
   data,
+  step,
 }: AirbnbYourHomeModalComponentsProps) => {
+  const handleNextClick = () => handleStep(++step);
+
   return (
     <div className="flex flex-col gap-8">
       <Heading
@@ -19,15 +22,15 @@ const Categories = ({
           grid grid-cols-1 md:grid-cols-2 gap-3  
           max-h-[50vh] overflow-y-auto"
       >
-        {categories.map((c) => (
-          <div key={c.label} className="col-span-1">
+        {categories.map(({ label, icon }) => (
+          <div key={label} className="col-span-1">
             <CategoryInput
               onClick={() => {
-                handleData({ ...data, category: c.label });
+                handleData({ ...data, category: label });
               }}
-              selected={data.category === c.label}
-              label={c.label}
-              icon={c.icon}
+              selected={data.category === label}
+              label={label}
+              icon={icon}
             />
           </div>
         ))}
@@ -36,7 +39,7 @@ const Categories = ({
         <div className="flex flex-row items-center w-full gap-4">
           <Button
             text="Next"
-            onClick={() => handleStep(1)}
+            onClick={handleNextClick}
             disabled={!data.category}
           />
         </div>

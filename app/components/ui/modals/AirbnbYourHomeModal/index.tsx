@@ -11,7 +11,6 @@ import Info from "./Info";
 import PropertyImage from "./Image";
 import Description from "./Description";
 import Price from "./Price";
-import { Listing } from "@prisma/client";
 import { Property } from "@/app/types";
 
 enum STEPS {
@@ -29,6 +28,19 @@ export type AirbnbYourHomeModalComponentsProps = {
   handleData: (data: Property) => void;
   handleStep: (value: number) => void;
   data: Property;
+  step: number;
+};
+
+const INITIAL_STATE = {
+  category: "",
+  location: null,
+  guestCount: 1,
+  roomCount: 1,
+  bathroomCount: 1,
+  imageSrc: "",
+  price: 1,
+  title: "",
+  description: "",
 };
 
 const AirbnbYourHomeModal = () => {
@@ -37,32 +49,12 @@ const AirbnbYourHomeModal = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(STEPS.CATEGORY);
 
-  const [data, setData] = useState<Property>({
-    category: "",
-    location: null,
-    guestCount: 1,
-    roomCount: 1,
-    bathroomCount: 1,
-    imageSrc: "",
-    price: 1,
-    title: "",
-    description: "",
-  });
+  const [data, setData] = useState<Property>(INITIAL_STATE);
 
   // reset state and step
   const handleReset = () => {
     setStep(0);
-    setData({
-      category: "",
-      location: null,
-      guestCount: 1,
-      roomCount: 1,
-      bathroomCount: 1,
-      imageSrc: "",
-      price: 1,
-      title: "",
-      description: "",
-    });
+    setData(INITIAL_STATE);
   };
 
   const handleSubmit = () => {
@@ -83,34 +75,71 @@ const AirbnbYourHomeModal = () => {
         setIsLoading(false);
       });
   };
-
+  const renderStep = (step: STEPS) => {
+    switch (step) {
+      case STEPS.CATEGORY:
+        return (
+          <Categories
+            handleData={setData}
+            handleStep={setStep}
+            data={data}
+            step={step}
+          />
+        );
+      case STEPS.LOCATION:
+        return (
+          <Locations
+            handleData={setData}
+            handleStep={setStep}
+            data={data}
+            step={step}
+          />
+        );
+      case STEPS.INFO:
+        return (
+          <Info
+            handleData={setData}
+            handleStep={setStep}
+            data={data}
+            step={step}
+          />
+        );
+      case STEPS.IMAGES:
+        return (
+          <PropertyImage
+            handleData={setData}
+            handleStep={setStep}
+            data={data}
+            step={step}
+          />
+        );
+      case STEPS.DESCRIPTION:
+        return (
+          <Description
+            handleData={setData}
+            handleStep={setStep}
+            data={data}
+            step={step}
+          />
+        );
+      case STEPS.PRICE:
+        return (
+          <Price
+            handleSubmit={handleSubmit}
+            handleData={setData}
+            handleStep={setStep}
+            data={data}
+            reset={handleReset}
+            step={step}
+          />
+        );
+      default:
+        return null;
+    }
+  };
   return (
     <AirBnbMyHomeModalContainer handleReset={handleReset}>
-      {step === STEPS.CATEGORY ? (
-        <Categories handleData={setData} handleStep={setStep} data={data} />
-      ) : null}
-      {step === STEPS.LOCATION ? (
-        <Locations handleData={setData} handleStep={setStep} data={data} />
-      ) : null}
-      {step === STEPS.INFO ? (
-        <Info handleData={setData} handleStep={setStep} data={data} />
-      ) : null}
-      {step === STEPS.IMAGES ? (
-        <PropertyImage handleData={setData} handleStep={setStep} data={data} />
-      ) : null}
-      {step === STEPS.DESCRIPTION ? (
-        <Description handleData={setData} handleStep={setStep} data={data} />
-      ) : null}
-      {step === STEPS.PRICE ? (
-        <Price
-          handleSubmit={handleSubmit}
-          handleData={setData}
-          handleStep={setStep}
-          data={data}
-          reset={handleReset}
-          price={true}
-        />
-      ) : null}
+      {renderStep(step)}
     </AirBnbMyHomeModalContainer>
   );
 };

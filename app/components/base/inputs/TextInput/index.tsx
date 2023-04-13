@@ -6,6 +6,7 @@ type TextInputProps = {
   type?: string;
   required?: boolean;
   price?: boolean;
+  value?: any;
 };
 
 const TextInput = ({
@@ -14,6 +15,7 @@ const TextInput = ({
   required,
   type,
   price,
+  value,
 }: TextInputProps) => {
   return (
     <div className="relative flex items-center">
@@ -33,6 +35,7 @@ const TextInput = ({
         onChange={onChange}
         required={required}
         placeholder={placeholder}
+        value={value}
       />
     </div>
   );

@@ -1,12 +1,23 @@
 import { Button, Counter, Heading } from "@/app/components/base";
 import { AirbnbYourHomeModalComponentsProps } from "..";
 
+type Counter = {
+  id: number;
+  value: number;
+  onChange: (value: number) => void;
+  title: string;
+  subtitle: string;
+};
+
 const Info = ({
   data,
   handleData,
   handleStep,
+  step,
 }: AirbnbYourHomeModalComponentsProps) => {
-  const counters = [
+  const handleBackClick = () => handleStep(--step);
+  const handleNextClick = () => handleStep(++step);
+  const counters: Counter[] = [
     {
       id: 1,
       value: data?.guestCount,
@@ -30,26 +41,33 @@ const Info = ({
       subtitle: "How many bathrooms do you have?",
     },
   ];
+
+  const isDataValid =
+    data?.guestCount && data?.roomCount && data?.bathroomCount;
+
   return (
     <div className="flex flex-col gap-8">
       <Heading
         title="Share some basics about your place"
-        subTitle="What amenitis do you have?"
+        subTitle="What amenities do you have?"
       />
-      {counters.map((c) => (
-        <div key={c.id}>
-          <Counter
-            onChange={c.onChange}
-            value={c.value}
-            title={c.title}
-            subtitle={c.subtitle}
-          />
-        </div>
+      {counters.map((counter) => (
+        <Counter
+          key={counter.id}
+          onChange={counter.onChange}
+          value={counter.value}
+          title={counter.title}
+          subtitle={counter.subtitle}
+        />
       ))}
       <div className="flex flex-col gap-2 p-6">
         <div className="flex flex-row items-center w-full gap-4">
-          <Button outline text="Back" onClick={() => handleStep(1)} />
-          <Button text="Next" onClick={() => handleStep(3)} />
+          <Button outline text="Back" onClick={handleBackClick} />
+          <Button
+            text="Next"
+            onClick={handleNextClick}
+            disabled={!isDataValid}
+          />
         </div>
       </div>
     </div>
