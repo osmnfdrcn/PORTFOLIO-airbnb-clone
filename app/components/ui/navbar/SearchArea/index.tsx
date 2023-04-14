@@ -1,8 +1,7 @@
 ("use clint");
 import { BiSearch } from "react-icons/bi";
-type Props = {};
 
-const SearchArea = (props: Props) => {
+const SearchArea = () => {
   return (
     <div
       className="

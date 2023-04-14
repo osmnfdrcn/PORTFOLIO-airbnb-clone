@@ -6,7 +6,7 @@ import FormInput from "./inputs/AuthFormTextInput";
 import ImageUpload from "./inputs/ImageUpload";
 import TextInput from "./inputs/TextInput";
 import CategoryInput from "./inputs/CategoryInput";
-
+import Heart from "./Heart";
 export {
   Avatar,
   Button,
@@ -16,4 +16,5 @@ export {
   ImageUpload,
   TextInput,
   CategoryInput,
+  Heart,
 };

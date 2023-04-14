@@ -1,6 +1,20 @@
-import { User } from "@prisma/client";
+import { Properties, Reservation, User } from "@prisma/client";
 
-// user type's date serialization problem
+// date serialization problems
+export type SafeProperties = Omit<Properties, "createdAt"> & {
+  createdAt: string;
+};
+
+export type SafeReservation = Omit<
+  Reservation,
+  "createdAt" | "startDate" | "endDate" | "listing"
+> & {
+  createdAt: string;
+  startDate: string;
+  endDate: string;
+  listing: SafeProperties;
+};
+
 export type SafeUser = Omit<
   User,
   "createdAt" | "updatedAt" | "emailVerified"

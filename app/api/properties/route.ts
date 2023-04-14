@@ -29,7 +29,7 @@ export async function POST(request: Request) {
     }
   });
 
-  const listing = await prisma.listing.create({
+  const listing = await prisma.properties.create({
     data: {
       title,
       description,

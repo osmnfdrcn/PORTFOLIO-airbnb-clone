@@ -50,6 +50,7 @@ const AirbnbYourHomeModal = () => {
   const [step, setStep] = useState(STEPS.CATEGORY);
 
   const [data, setData] = useState<Property>(INITIAL_STATE);
+  console.log(data);
 
   // reset state and step
   const handleReset = () => {
@@ -60,7 +61,7 @@ const AirbnbYourHomeModal = () => {
   const handleSubmit = () => {
     setIsLoading(true);
     axios
-      .post("/api/listings", data)
+      .post("/api/properties", data)
       .then(() => {
         toast.success("Listing created!");
         router.refresh();
