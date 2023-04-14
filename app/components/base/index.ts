@@ -7,12 +7,14 @@ import ImageUpload from "./inputs/ImageUpload";
 import TextInput from "./inputs/TextInput";
 import CategoryInput from "./inputs/CategoryInput";
 import Heart from "./Heart";
+import Calendar from "./inputs/Calendar";
 export {
   Avatar,
   Button,
   Heading,
   Counter,
   FormInput,
+  Calendar,
   ImageUpload,
   TextInput,
   CategoryInput,

@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-
 import prisma from "@/app/libs/prismadb";
 import { getCurrentUser } from "@/app/utils/getCurrentUser";
 
@@ -29,7 +28,7 @@ export async function POST(request: Request) {
     }
   });
 
-  const listing = await prisma.properties.create({
+  const property = await prisma.properties.create({
     data: {
       title,
       description,
@@ -39,10 +38,11 @@ export async function POST(request: Request) {
       bathroomCount,
       guestCount,
       locationValue: location.display_name,
+      coordinates: [parseFloat(location.lat), parseFloat(location.lon)],
       price: parseInt(price, 10),
       userId: currentUser.id,
     },
   });
 
-  return NextResponse.json(listing);
+  return NextResponse.json(property);
 }

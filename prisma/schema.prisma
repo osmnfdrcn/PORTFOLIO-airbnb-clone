@@ -66,6 +66,7 @@ model Properties {
   bathroomCount Int
   guestCount Int
   locationValue String
+  coordinates Float[]
   userId String @db.ObjectId
   price Int
 

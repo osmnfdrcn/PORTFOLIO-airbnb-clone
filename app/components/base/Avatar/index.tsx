@@ -2,7 +2,7 @@
 import Image from "next/image";
 
 interface AvatarProps {
-  image?: string;
+  image?: string | null;
 }
 
 const Avatar = ({ image }: AvatarProps) => {

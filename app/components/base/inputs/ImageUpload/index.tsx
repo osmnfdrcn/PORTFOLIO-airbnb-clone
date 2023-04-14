@@ -19,6 +19,7 @@ interface ImageUploadProps {
 const ImageUpload = ({ onChange, value }: ImageUploadProps) => {
   const handleUpload = useCallback(
     (result: any) => {
+      console.log({ result });
       onChange(result.info.secure_url);
     },
     [onChange]
@@ -29,6 +30,7 @@ const ImageUpload = ({ onChange, value }: ImageUploadProps) => {
       onUpload={handleUpload}
       uploadPreset={uploadPreset}
       options={{
+        maxFileSize: 1024000,
         maxFiles: 1,
       }}
     >
@@ -41,9 +43,9 @@ const ImageUpload = ({ onChange, value }: ImageUploadProps) => {
               cursor-pointer
               hover:opacity-70
               transition
-              border-dashed 
-              border-2 
-              p-20 
+              border-dashed
+              border-2
+              p-20
               border-neutral-300
               flex
               flex-col
