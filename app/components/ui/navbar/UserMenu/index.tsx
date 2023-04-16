@@ -3,7 +3,7 @@ import useLoginModal from "@/app/hooks/useLoginModal";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
 import useRentModal from "@/app/hooks/useRentModal";
 import useToggle from "@/app/hooks/useToggle";
-import { SafeUser } from "@/app/types";
+import { IUser } from "@/app/types";
 import { User } from "@prisma/client";
 import { signOut } from "next-auth/react";
 import { useCallback } from "react";
@@ -13,7 +13,7 @@ import { TbWorld } from "react-icons/tb";
 import Avatar from "../../../base/Avatar";
 
 interface UserMenuProps {
-  currentUser?: SafeUser | null;
+  currentUser?: IUser | null;
 }
 const UserMenu = ({ currentUser }: UserMenuProps) => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useToggle(false);

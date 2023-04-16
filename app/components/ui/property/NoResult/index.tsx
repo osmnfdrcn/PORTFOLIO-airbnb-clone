@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Button, Heading } from "../../base";
+import { Button, Heading } from "../../../base";
 
 interface EmptyStateProps {
   title?: string;
@@ -9,7 +9,7 @@ interface EmptyStateProps {
   showReset?: boolean;
 }
 
-const EmptyState = ({
+const NoResult = ({
   title = "No exact matches",
   subtitle = "Try changing or removing some of your filters.",
   showReset,
@@ -41,4 +41,4 @@ const EmptyState = ({
   );
 };
 
-export default EmptyState;
+export default NoResult;

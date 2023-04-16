@@ -5,13 +5,13 @@ import axios from "axios";
 import { useRentModal } from "@/app/hooks";
 import AirBnbMyHomeModalContainer from "./AirBnbYourHomeModalContainer";
 import { useState } from "react";
-import Categories from "./Categories";
+import Categories from "./AirBnbYourHomeModalContainer/Categories";
 import Locations from "./Locations";
 import Info from "./Info";
-import PropertyImage from "./Image";
+import PropertyImage from "./Image/index2";
 import Description from "./Description";
 import Price from "./Price";
-import { Property } from "@/app/types";
+import { IProperty } from "@/app/types";
 
 enum STEPS {
   CATEGORY = 0,
@@ -25,14 +25,14 @@ enum STEPS {
 export type AirbnbYourHomeModalComponentsProps = {
   handleSubmit?: () => void;
   reset?: () => void;
-  handleData: (data: Property) => void;
+  handleData: (data: IProperty) => void;
   handleStep: (value: number) => void;
-  data: Property;
+  data: IProperty;
   step: number;
 };
 
 const INITIAL_STATE = {
-  category: "",
+  categories: [],
   location: null,
   guestCount: 1,
   roomCount: 1,
@@ -49,8 +49,7 @@ const AirbnbYourHomeModal = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(STEPS.CATEGORY);
 
-  const [data, setData] = useState<Property>(INITIAL_STATE);
-  console.log(data);
+  const [data, setData] = useState<IProperty>(INITIAL_STATE);
 
   // reset state and step
   const handleReset = () => {
@@ -139,7 +138,7 @@ const AirbnbYourHomeModal = () => {
     }
   };
   return (
-    <AirBnbMyHomeModalContainer handleReset={handleReset}>
+    <AirBnbMyHomeModalContainer reset={handleReset}>
       {renderStep(step)}
     </AirBnbMyHomeModalContainer>
   );

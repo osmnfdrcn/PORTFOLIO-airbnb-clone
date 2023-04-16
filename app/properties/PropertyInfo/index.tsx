@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { IconType } from "react-icons";
-import { SafeUser } from "@/app/types";
+import { IUser } from "@/app/types";
 import PropertyCategory from "../PropertyCategory";
 import { Avatar } from "@/app/components/base";
 
@@ -14,34 +14,35 @@ const Map = dynamic(
 );
 
 interface PropertyInfoProps {
-  user: SafeUser;
+  isYourProperty: boolean;
+  user: IUser;
   description: string;
   guestCount: number;
   roomCount: number;
   bathroomCount: number;
-  category:
-    | {
-        icon: IconType;
-        label: string;
-        description: string;
-      }
+  categories:
+    | [
+        {
+          icon: IconType;
+          label: string;
+          description: string;
+        }
+      ]
     | undefined;
   locationValue: string;
   coordinates: number[];
 }
 
 const PropertyInfo = ({
+  isYourProperty,
   user,
   description,
   guestCount,
   roomCount,
   bathroomCount,
-  category,
-  locationValue,
+  categories,
   coordinates,
 }: PropertyInfoProps) => {
-  console.log({ coordinates });
-
   return (
     <div className="col-span-4 flex flex-col gap-8">
       <div className="flex flex-col gap-2">
@@ -55,7 +56,7 @@ const PropertyInfo = ({
             gap-2
           "
         >
-          <div>Hosted by {user?.name}</div>
+          <div>Hosted by {isYourProperty ? "You" : user?.name} </div>
           <Avatar image={user?.image} />
         </div>
         <div
@@ -74,13 +75,17 @@ const PropertyInfo = ({
         </div>
       </div>
       <hr />
-      {category && (
-        <PropertyCategory
-          icon={category.icon}
-          label={category?.label}
-          description={category?.description}
-        />
-      )}
+
+      {categories?.map((c) => {
+        return (
+          <PropertyCategory
+            key={c.label}
+            icon={c.icon}
+            label={c?.label}
+            description={c?.description}
+          />
+        );
+      })}
       <hr />
       <div
         className="

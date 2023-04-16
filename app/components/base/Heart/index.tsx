@@ -3,11 +3,11 @@
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 import useFavorites from "@/app/hooks/useFavorites";
-import { SafeUser } from "@/app/types";
+import { IUser } from "@/app/types";
 
 interface HeartProps {
   propertyId: string;
-  currentUser?: SafeUser | null;
+  currentUser?: IUser | null;
 }
 
 const Heart = ({ propertyId, currentUser }: HeartProps) => {

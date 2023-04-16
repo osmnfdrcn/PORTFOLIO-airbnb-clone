@@ -36,8 +36,8 @@ const CategoryBox = ({ icon: Icon, label, selected }: CategoryBoxProps) => {
     <div
       onClick={handleClick}
       className={`
-        flex flex-col items-center justify-center gap-2
-        p-3 border-b-2
+        flex flex-col items-center justify-center gap-1
+        px-3 pb-2 border-b-2
         hover:text-neutral-800
         transition
         cursor-pointer
@@ -45,8 +45,8 @@ const CategoryBox = ({ icon: Icon, label, selected }: CategoryBoxProps) => {
         ${selected ? "text-neutral-800" : "text-neutral-500"}
       `}
     >
-      <Icon size={20} />
-      <div className="font-medium text-[14px]">{label}</div>
+      <Icon size={16} />
+      <div className="font-medium text-[12px] md:text-[14px]">{label}</div>
     </div>
   );
 };

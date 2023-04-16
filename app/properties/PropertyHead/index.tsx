@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 
-import useCountries from "@/app/hooks/useCountries";
-import { SafeUser } from "@/app/types";
+import { IUser } from "@/app/types";
 import { Heading, Heart } from "@/app/components/base";
 
 interface PropertyHeadProps {
@@ -11,7 +10,7 @@ interface PropertyHeadProps {
   locationValue: string;
   imageSrc: string;
   id: string;
-  currentUser?: SafeUser | null;
+  currentUser?: IUser | null;
 }
 
 const PropertyHead = ({

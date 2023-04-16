@@ -6,12 +6,12 @@ import { IoMdClose } from "react-icons/io";
 import Button from "../../../../base/Button";
 
 interface AirBnbYourHomeModalContainerProps {
-  handleReset: () => void;
+  reset: () => void;
   children: React.ReactNode;
 }
 
 const AirBnbYourHomeModalContainer = ({
-  handleReset,
+  reset,
   children,
 }: AirBnbYourHomeModalContainerProps) => {
   const { isOpen, onClose } = useRentModal();
@@ -19,11 +19,11 @@ const AirBnbYourHomeModalContainer = ({
   useEffect(() => setShowModal(isOpen), [isOpen]);
 
   const handleCloseModal = useCallback(() => {
+    reset();
     setShowModal(false);
     setTimeout(() => {
       onClose();
     }, 300);
-    handleReset();
   }, [onClose]);
 
   if (!isOpen) return null;

@@ -4,8 +4,8 @@ import Navbar from "./components/ui/navbar";
 import RegisterModal from "./components/ui/modals/AuthModals/RegisterModal";
 import NotificationProvider from "./providers/NotificationProvider";
 import LoginModal from "./components/ui/modals/AuthModals/LoginModal";
-import { getCurrentUser } from "./utils/getCurrentUser";
 import AirbnbYourHomeModal from "./components/ui/modals/AirbnbYourHomeModal";
+import getCurrentUser from "./helpers/getCurrentUser";
 export const metadata = {
   title: "AIRBNB CLONE",
   description: "An AIRBNB Clone",

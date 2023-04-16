@@ -1,10 +1,8 @@
-import { getCurrentUser } from "@/app/utils/getCurrentUser";
-
-import getReservations from "@/app/utils/getReservations";
-
-import EmptyState from "@/app/components/ui/property/EmptyState";
-import PropertyClient from "./PropertyClient";
-import getPropertiesById from "@/app/utils/getPropertyById";
+import NoResult from "@/app/components/ui/property/NoResult";
+import getCurrentUser from "@/app/helpers/getCurrentUser";
+import getPropertiesById from "@/app/helpers/getPropertyById";
+import getReservations from "@/app/helpers/getReservations";
+import PropertyClient from "../PropertyClient/PropertyClient";
 
 interface IParams {
   propertyId?: string;
@@ -16,7 +14,7 @@ const PropertyPage = async ({ params }: { params: IParams }) => {
   const currentUser = await getCurrentUser();
 
   if (!property) {
-    return <EmptyState />;
+    return <NoResult />;
   }
 
   return (

@@ -1,17 +1,18 @@
 import React from "react";
-import EmptyState from "./components/ui/property/EmptyState";
+import NoResult from "./components/ui/property/NoResult";
 import Container from "./components/layout/Container";
-import getProperties, { IPropertiesParams } from "@/app/utils/getProperties";
-import { getCurrentUser } from "@/app/utils/getCurrentUser";
+import getProperties, { IPropertiesParams } from "@/app/helpers/getProperties";
+import getCurrentUser from "@/app/helpers/getCurrentUser";
 import PropertyCard from "./components/ui/property/PropertyCard";
-interface HomeProps {
+
+interface IHome {
   searchParams: IPropertiesParams;
 }
-const Home = async ({ searchParams }: HomeProps) => {
+const Home = async ({ searchParams }: IHome) => {
   const properties = await getProperties(searchParams);
   const currentUser = await getCurrentUser();
-  if (!properties.length) {
-    return <EmptyState showReset />;
+  if (!properties?.length) {
+    return <NoResult showReset />;
   }
   return (
     <Container>

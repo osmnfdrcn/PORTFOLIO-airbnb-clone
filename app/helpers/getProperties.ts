@@ -21,13 +21,14 @@ export default async function getProperties(params: IPropertiesParams) {
       locationValue,
       startDate,
       endDate,
-      category,
+      category: categoryParameter,
     } = params;
+    // console.log({ params });
+    // { params: { category: 'Beach' } }
 
     let query: any = {};
-
     userId ? (query.userId = userId) : null;
-    category ? (query.category = category) : null;
+    categoryParameter ? (query.categories = { has: categoryParameter }) : null;
     roomCount ? (query.roomCount = { gte: +roomCount }) : null;
     guestCount ? (query.guestCount = { gte: +guestCount }) : null;
     bathroomCount ? (query.bathroomCount = { gte: +bathroomCount }) : null;
@@ -56,16 +57,20 @@ export default async function getProperties(params: IPropertiesParams) {
       orderBy: {
         createdAt: "desc",
       },
+      skip: 0,
+      take: 4,
     });
+    console.log(propertyList);
 
     // date serialization problem
     const safePropertyList = propertyList.map((property) => ({
       ...property,
       createdAt: property.createdAt.toISOString(),
     }));
+    console.log({ safePropertyList });
 
     return safePropertyList;
   } catch (error: any) {
-    throw new Error(error);
+    // throw new Error(error);
   }
 }

@@ -1,5 +1,5 @@
 import { Button, Heading, TextInput } from "@/app/components/base";
-import { Location } from "@/app/types";
+import { ILocation } from "@/app/types";
 import axios from "axios";
 import dynamic from "next/dynamic";
 import { useMemo, useState } from "react";
@@ -17,7 +17,7 @@ const Locations = ({
 }: AirbnbYourHomeModalComponentsProps) => {
   const [searchText, setSearchText] = useState("");
   const [listPlace, setListPlace] = useState([]);
-  const [selectPosition, setSelectPosition] = useState<Location | null>(null);
+  const [selectPosition, setSelectPosition] = useState<ILocation | null>(null);
   const { location } = data;
   const handleBackClick = () => handleStep(--step);
   const handleNextClick = () => handleStep(++step);
@@ -43,7 +43,7 @@ const Locations = ({
     [searchText]
   );
 
-  const handleLocationClick = (item: Location): void => {
+  const handleLocationClick = (item: ILocation): void => {
     handleData({ ...data, location: item });
     setSelectPosition(item);
     setListPlace([]);
@@ -106,7 +106,7 @@ const Locations = ({
           </div>
         ) : null}
 
-        {listPlace.map((item: Location) => (
+        {listPlace.map((item: ILocation) => (
           <p
             key={item?.place_id}
             className="hover:text-black cursor-pointer"

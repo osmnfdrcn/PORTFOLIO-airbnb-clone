@@ -1,12 +1,12 @@
-import { SafeUser } from "@/app/types";
 import Categories from "./Categories";
 import Container from "../../layout/Container";
 import Logo from "./Logo";
 import SearchArea from "./SearchArea";
 import UserMenu from "./UserMenu";
+import { IUser } from "@/app/types";
 
 interface NavbarProps {
-  currentUser?: SafeUser | null;
+  currentUser?: IUser | null;
 }
 
 const Navbar = ({ currentUser }: NavbarProps) => {

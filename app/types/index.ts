@@ -1,30 +1,27 @@
 import { Properties, Reservation, User } from "@prisma/client";
 
 // date serialization problems
-export type SafeProperties = Omit<Properties, "createdAt"> & {
+export type IProperties = Omit<Properties, "createdAt"> & {
   createdAt: string;
 };
 
-export type SafeReservation = Omit<
+export type IReservation = Omit<
   Reservation,
   "createdAt" | "startDate" | "endDate" | "listing"
 > & {
   createdAt: string;
   startDate: string;
   endDate: string;
-  listing: SafeProperties;
+  listing: IProperties;
 };
 
-export type SafeUser = Omit<
-  User,
-  "createdAt" | "updatedAt" | "emailVerified"
-> & {
+export type IUser = Omit<User, "createdAt" | "updatedAt" | "emailVerified"> & {
   createdAt: string;
   updatedAt: string;
   emailVerified: string | null;
 };
 
-export type Location = {
+export type ILocation = {
   address: {
     ISO3166_2_lvl4: string;
     city: string;
@@ -48,9 +45,9 @@ export type Location = {
   place_id: number;
   type: string;
 };
-export type Property = {
-  category: string;
-  location: Location | null;
+export type IProperty = {
+  categories: string[];
+  location: ILocation | null;
   guestCount: number;
   roomCount: number;
   bathroomCount: number;

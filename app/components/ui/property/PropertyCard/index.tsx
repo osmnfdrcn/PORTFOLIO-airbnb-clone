@@ -1,23 +1,19 @@
 "use client";
-
+import { format } from "date-fns";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
-import { format } from "date-fns";
-
-import useCountries from "@/app/hooks/useCountries";
-import { SafeProperties, SafeReservation, SafeUser } from "@/app/types";
-
+import { IProperties, IReservation, IUser } from "@/app/types";
 import { Button, Heart } from "@/app/components/base";
 
 interface PropertyCardProps {
-  data: SafeProperties;
-  reservation?: SafeReservation;
+  data: IProperties;
+  reservation?: IReservation;
   onAction?: (id: string) => void;
   disabled?: boolean;
   actionLabel?: string;
   actionId?: string;
-  currentUser?: SafeUser | null;
+  currentUser?: IUser | null;
 }
 
 const PropertyCard = ({
@@ -30,12 +26,11 @@ const PropertyCard = ({
   currentUser,
 }: PropertyCardProps) => {
   const router = useRouter();
-  const { getByValue } = useCountries();
-  console.log(data);
 
   const location = data.locationValue.split(",");
   const country = location[location.length - 1];
   const city = location[0];
+  console.log(data);
 
   const handleCancel = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -94,7 +89,10 @@ const PropertyCard = ({
             right-3
           "
           >
-            <Heart propertyId={data.id} currentUser={currentUser} />
+            {/* user cannot favorite his/her own property */}
+            {data?.userId != currentUser?.id ? (
+              <Heart propertyId={data.id} currentUser={currentUser} />
+            ) : null}
           </div>
         </div>
         <div className="font-semibold text-lg">
@@ -103,7 +101,7 @@ const PropertyCard = ({
           {country}
         </div>
         <div className="font-light text-neutral-500">
-          {reservationDate || data.category}
+          {reservationDate || data.categories}
         </div>
         <div className="flex flex-row items-center gap-1">
           <div className="font-semibold">$ {price}</div>

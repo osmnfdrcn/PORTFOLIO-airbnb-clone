@@ -1,7 +1,7 @@
 "use client";
 import { Button, CategoryInput, Heading } from "@/app/components/base";
-import { categories } from "@/app/config/categoryList";
-import { AirbnbYourHomeModalComponentsProps } from "..";
+import { categoryList } from "@/app/config/categoryList";
+import { AirbnbYourHomeModalComponentsProps } from "../..";
 
 const Categories = ({
   handleData,
@@ -15,20 +15,21 @@ const Categories = ({
     <div className="flex flex-col gap-8">
       <Heading
         title="Which of these best describes your place?"
-        subTitle="Pick a category"
+        subTitle="Pick categories"
       />
       <div
         className="
-          grid grid-cols-1 md:grid-cols-2 gap-3  
+          grid grid-cols-2 md:grid-cols-3 gap-3  
           max-h-[50vh] overflow-y-auto"
       >
-        {categories.map(({ label, icon }) => (
+        {categoryList.map(({ label, icon }) => (
           <div key={label} className="col-span-1">
             <CategoryInput
-              onClick={() => {
-                handleData({ ...data, category: label });
+              onClick={(arr) => {
+                handleData({ ...data, categories: arr });
               }}
-              selected={data.category === label}
+              category={data.categories}
+              selected={data.categories.includes(label)}
               label={label}
               icon={icon}
             />
@@ -40,7 +41,7 @@ const Categories = ({
           <Button
             text="Next"
             onClick={handleNextClick}
-            disabled={!data.category}
+            disabled={!data.categories}
           />
         </div>
       </div>

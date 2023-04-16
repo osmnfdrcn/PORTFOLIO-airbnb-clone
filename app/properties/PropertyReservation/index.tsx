@@ -30,21 +30,25 @@ const PropertyReservation = ({
         border-[1px]
       border-neutral-200 
         overflow-hidden
+        sticky top-[100px]
       "
     >
       <div
         className="
-      flex flex-row items-center gap-1 p-4"
+      flex flex-row items-center justify-center gap-1 p-4"
       >
         <div className="text-2xl font-semibold">$ {price}</div>
         <div className="font-light text-neutral-600">night</div>
       </div>
       <hr />
-      <Calendar
-        value={dateRange}
-        disabledDates={disabledDates}
-        onChange={(value) => onChangeDate(value.selection)}
-      />
+      <div className="        flex flex-col items-center justify-center ">
+        <Calendar
+          value={dateRange}
+          disabledDates={disabledDates}
+          onChange={(value) => onChangeDate(value.selection)}
+        />
+      </div>
+
       <hr />
       <div className="p-4">
         <Button disabled={disabled} text="Reserve" onClick={onSubmit} />
@@ -56,7 +60,8 @@ const PropertyReservation = ({
           flex 
           flex-row 
           items-center 
-          justify-between
+          justify-center
+          gap-4
           font-semibold
           text-lg
         "

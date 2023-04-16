@@ -8,9 +8,9 @@ import { useRouter } from "next/navigation";
 import { differenceInDays, eachDayOfInterval } from "date-fns";
 
 import useLoginModal from "@/app/hooks/useLoginModal";
-import { SafeProperties, SafeReservation, SafeUser } from "@/app/types";
+import { IProperties, IReservation, IUser } from "@/app/types";
 import Container from "@/app/components/layout/Container";
-import { categories } from "@/app/config/categoryList";
+import { categoryList } from "@/app/config/categoryList";
 import PropertyHead from "../PropertyHead";
 import PropertyInfo from "../PropertyInfo";
 import PropertyReservation from "../PropertyReservation";
@@ -22,11 +22,11 @@ const initialDateRange = {
 };
 
 interface PropertyClientProps {
-  reservations?: SafeReservation[];
-  property: SafeProperties & {
-    user: SafeUser;
+  reservations?: IReservation[];
+  property: IProperties & {
+    user: IUser;
   };
-  currentUser?: SafeUser | null;
+  currentUser?: IUser | null;
 }
 
 const PropertyClient = ({
@@ -52,13 +52,16 @@ const PropertyClient = ({
     return dates;
   }, [reservations]);
 
-  const category = useMemo(() => {
-    return categories.find((items) => items.label === property.category);
-  }, [property.category]);
+  const categories = useMemo(() => {
+    return categoryList.filter((items) =>
+      property.categories.includes(items.label)
+    );
+  }, [property.categories]);
 
   const [isLoading, setIsLoading] = useState(false);
   const [totalPrice, setTotalPrice] = useState(property.price);
   const [dateRange, setDateRange] = useState<Range>(initialDateRange);
+  const isYourProperty = property.userId === currentUser?.id;
 
   const onCreateReservation = useCallback(() => {
     if (!currentUser) {
@@ -124,8 +127,9 @@ const PropertyClient = ({
             "
           >
             <PropertyInfo
+              isYourProperty={isYourProperty}
               user={property.user}
-              category={category}
+              categories={categories as any}
               description={property.description}
               roomCount={property.roomCount}
               guestCount={property.guestCount}
@@ -141,15 +145,17 @@ const PropertyClient = ({
                 md:col-span-3
               "
             >
-              <PropertyReservation
-                price={property.price}
-                totalPrice={totalPrice}
-                onChangeDate={(value: any) => setDateRange(value)}
-                dateRange={dateRange}
-                onSubmit={onCreateReservation}
-                disabled={isLoading}
-                disabledDates={disabledDates}
-              />
+              {!isYourProperty ? (
+                <PropertyReservation
+                  price={property.price}
+                  totalPrice={totalPrice}
+                  onChangeDate={(value: any) => setDateRange(value)}
+                  dateRange={dateRange}
+                  onSubmit={onCreateReservation}
+                  disabled={isLoading}
+                  disabledDates={disabledDates}
+                />
+              ) : null}
             </div>
           </div>
         </div>

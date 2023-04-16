@@ -1,9 +1,9 @@
 "use client";
 
 import { usePathname, useSearchParams } from "next/navigation";
-import { categories } from "@/app/config/categoryList";
-import CategoryBox from "../../modals/AirbnbYourHomeModal/Categories/CategoryBox";
+import { categoryList } from "@/app/config/categoryList";
 import Container from "../../../layout/Container";
+import CategoryBox from "./CategoryBox";
 
 const Categories = () => {
   const params = useSearchParams();
@@ -21,7 +21,7 @@ const Categories = () => {
           pt-4
           overflow-x-auto"
       >
-        {categories.map((item) => (
+        {categoryList.map((item) => (
           <CategoryBox
             key={item.label}
             label={item.label}
