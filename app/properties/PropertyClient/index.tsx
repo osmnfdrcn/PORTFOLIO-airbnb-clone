@@ -74,10 +74,10 @@ const PropertyClient = ({
         totalPrice,
         startDate: dateRange.startDate,
         endDate: dateRange.endDate,
-        listingId: property?.id,
+        propertyId: property?.id,
       })
       .then(() => {
-        toast.success("Listing reserved!");
+        toast.success("Property reserved!");
         setDateRange(initialDateRange);
         router.push("/trips");
       })

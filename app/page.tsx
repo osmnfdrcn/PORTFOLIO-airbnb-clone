@@ -4,7 +4,6 @@ import Container from "./components/layout/Container";
 import getProperties, { IPropertiesParams } from "@/app/helpers/getProperties";
 import getCurrentUser from "@/app/helpers/getCurrentUser";
 import PropertyCard from "./components/ui/property/PropertyCard";
-
 interface IHome {
   searchParams: IPropertiesParams;
 }

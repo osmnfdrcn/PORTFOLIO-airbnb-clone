@@ -26,11 +26,9 @@ const PropertyCard = ({
   currentUser,
 }: PropertyCardProps) => {
   const router = useRouter();
-
-  const location = data.locationValue.split(",");
-  const country = location[location.length - 1];
+  const location = data?.locationValue.split(",");
+  const country = location[location?.length - 1];
   const city = location[0];
-  console.log(data);
 
   const handleCancel = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -95,14 +93,12 @@ const PropertyCard = ({
             ) : null}
           </div>
         </div>
-        <div className="font-semibold text-lg">
+        <div className="font-semibold text-sm">
           {city}
-          {" | "}
+          {", "}
           {country}
         </div>
-        <div className="font-light text-neutral-500">
-          {reservationDate || data.categories}
-        </div>
+
         <div className="flex flex-row items-center gap-1">
           <div className="font-semibold">$ {price}</div>
           {!reservation && <div className="font-light">night</div>}

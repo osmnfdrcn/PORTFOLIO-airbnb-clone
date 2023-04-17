@@ -9,7 +9,7 @@ import { signOut } from "next-auth/react";
 import { useCallback } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { TbWorld } from "react-icons/tb";
-
+import { useRouter } from "next/navigation";
 import Avatar from "../../../base/Avatar";
 
 interface UserMenuProps {
@@ -17,6 +17,7 @@ interface UserMenuProps {
 }
 const UserMenu = ({ currentUser }: UserMenuProps) => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useToggle(false);
+  const router = useRouter();
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
   const rentModal = useRentModal();
@@ -71,10 +72,22 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
         >
           {currentUser ? (
             <>
-              <MenuItem label="My trips" onClick={loginModal.onOpen} />
-              <MenuItem label="My favourites" onClick={loginModal.onOpen} />
-              <MenuItem label="My reservations" onClick={loginModal.onOpen} />
-              <MenuItem label="My properties" onClick={loginModal.onOpen} />
+              <MenuItem
+                label="My trips"
+                onClick={() => router.push("/trips")}
+              />
+              <MenuItem
+                label="My favorites"
+                onClick={() => router.push("/favorites")}
+              />
+              <MenuItem
+                label="My reservations"
+                onClick={() => router.push("/reservations")}
+              />
+              <MenuItem
+                label="My properties"
+                onClick={() => router.push("/myproperties")}
+              />
               <MenuItem label="Airbnb my home" onClick={loginModal.onOpen} />
               <MenuItem label="Logout" onClick={() => signOut()} />
             </>
@@ -102,6 +115,7 @@ export const MenuItem = ({ onClick, label }: MenuItemProps) => {
     <div
       className="px-4 py-3 
       hover:bg-neutral-100 
+      cursor-pointer
       transition
       font-semibold"
       onClick={onClick}

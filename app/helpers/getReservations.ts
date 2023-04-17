@@ -13,7 +13,7 @@ export default async function getReservations(params: IParams) {
     const query: any = {};
 
     if (propertyId) {
-      query.listingId = propertyId;
+      query.propertyId = propertyId;
     }
 
     if (userId) {
@@ -21,32 +21,33 @@ export default async function getReservations(params: IParams) {
     }
 
     if (authorId) {
-      query.listing = { userId: authorId };
+      query.property = { userId: authorId };
     }
 
     const reservations = await prisma.reservation.findMany({
       where: query,
       include: {
-        listing: true,
+        property: true,
       },
       orderBy: {
         createdAt: "desc",
       },
     });
 
-    const safeReservations = reservations.map((reservation) => ({
+    const safeReservations = reservations?.map((reservation) => ({
       ...reservation,
       createdAt: reservation.createdAt.toISOString(),
       startDate: reservation.startDate.toISOString(),
       endDate: reservation.endDate.toISOString(),
-      listing: {
-        ...reservation.listing,
-        createdAt: reservation.listing.createdAt.toISOString(),
+      property: {
+        ...reservation.property,
+        createdAt: reservation.property.createdAt.toISOString(),
       },
     }));
+    console.log(safeReservations);
 
     return safeReservations;
   } catch (error: any) {
-    throw new Error(error);
+    // throw new Error(error);
   }
 }

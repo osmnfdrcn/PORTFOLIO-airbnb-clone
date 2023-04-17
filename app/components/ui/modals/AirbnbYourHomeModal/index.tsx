@@ -8,7 +8,7 @@ import { useState } from "react";
 import Categories from "./AirBnbYourHomeModalContainer/Categories";
 import Locations from "./Locations";
 import Info from "./Info";
-import PropertyImage from "./Image/index2";
+import PropertyImage from "./Image";
 import Description from "./Description";
 import Price from "./Price";
 import { IProperty } from "@/app/types";
@@ -62,7 +62,7 @@ const AirbnbYourHomeModal = () => {
     axios
       .post("/api/properties", data)
       .then(() => {
-        toast.success("Listing created!");
+        toast.success("Property created!");
         router.refresh();
         setStep(STEPS.CATEGORY);
         handleReset();

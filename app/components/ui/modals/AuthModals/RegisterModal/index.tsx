@@ -1,6 +1,9 @@
 "use client";
+import useLoginModal from "@/app/hooks/useLoginModal";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
+import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
+import { signIn } from "next-auth/react";
 import { useCallback, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
@@ -9,11 +12,8 @@ import { FcGoogle } from "react-icons/fc";
 import Button from "../../../../base/Button";
 import Heading from "../../../../base/Heading";
 import FormInput from "../../../../base/inputs/AuthFormTextInput";
-import { yupResolver } from "@hookform/resolvers/yup";
-import RegisterModalSchema from "./RegisterModalSchema";
-import { signIn } from "next-auth/react";
-import useLoginModal from "@/app/hooks/useLoginModal";
 import AuthModalContainer from "../AuthModalContainer";
+import RegisterModalSchema from "./RegisterModalSchema";
 
 const RegisterModal = () => {
   const registerModal = useRegisterModal();

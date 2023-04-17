@@ -2,7 +2,7 @@ import NoResult from "@/app/components/ui/property/NoResult";
 import getCurrentUser from "@/app/helpers/getCurrentUser";
 import getPropertiesById from "@/app/helpers/getPropertyById";
 import getReservations from "@/app/helpers/getReservations";
-import PropertyClient from "../PropertyClient/PropertyClient";
+import PropertyClient from "../PropertyClient";
 
 interface IParams {
   propertyId?: string;
@@ -20,7 +20,7 @@ const PropertyPage = async ({ params }: { params: IParams }) => {
   return (
     <PropertyClient
       property={property}
-      reservations={reservations}
+      reservations={reservations as any}
       currentUser={currentUser}
     />
   );
