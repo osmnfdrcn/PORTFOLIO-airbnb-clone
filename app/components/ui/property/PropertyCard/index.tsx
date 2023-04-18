@@ -2,9 +2,11 @@
 import { format } from "date-fns";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { IProperties, IReservation, IUser } from "@/app/types";
 import { Button, Heart } from "@/app/components/base";
+import useImageSlider from "@/app/hooks/useImageSlider";
+import { string } from "yup";
 
 interface PropertyCardProps {
   data: IProperties;
@@ -29,6 +31,12 @@ const PropertyCard = ({
   const location = data?.locationValue.split(",");
   const country = location[location?.length - 1];
   const city = location[0];
+  const [showImageArrows, setShowImageArrows] = useState(false);
+
+  const [currentImage, handlePrevImage, handleNextImage] = useImageSlider(
+    data?.imageSrc,
+    false
+  );
 
   const handleCancel = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -37,6 +45,20 @@ const PropertyCard = ({
       onAction?.(actionId);
     },
     [disabled, onAction, actionId]
+  );
+
+  const handleImage = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>, action: string) => {
+      e.stopPropagation();
+
+      if (action === "next") {
+        handleNextImage();
+      }
+      if (action === "back") {
+        handlePrevImage();
+      }
+    },
+    [handleNextImage, handlePrevImage]
   );
 
   const price = useMemo(() => {
@@ -70,16 +92,34 @@ const PropertyCard = ({
             rounded-xl
           "
         >
-          <Image
-            fill
-            className="
+          <>
+            <Image
+              fill
+              className="
               object-cover 
               h-full 
               w-full 
             "
-            src={data.imageSrc}
-            alt="Properties"
-          />
+              src={currentImage as string}
+              alt="Properties"
+            />
+
+            <div className="w-full flex justify-between absolute z-10 top-[47%]">
+              <button
+                className="w-7 h-7 hover:w-8 hover:h-8 transition-all duration-300 ease-in-out rounded-full bg-neutral-200 text-stone-600 p-1 flex justify-center items-center"
+                onClick={(e) => handleImage(e, "back")}
+              >
+                {"<"}
+              </button>
+              <button
+                className="w-7 h-7 hover:w-8 hover:h-8 transition-all duration-300 ease-in-out rounded-full bg-neutral-200 text-stone-600 p-1 flex justify-center items-center"
+                onClick={(e) => handleImage(e, "next")}
+              >
+                {">"}
+              </button>
+            </div>
+          </>
+
           <div
             className="
             absolute
@@ -103,6 +143,7 @@ const PropertyCard = ({
           <div className="font-semibold">$ {price}</div>
           {!reservation && <div className="font-light">night</div>}
         </div>
+
         {onAction && actionLabel && (
           <Button
             disabled={disabled}

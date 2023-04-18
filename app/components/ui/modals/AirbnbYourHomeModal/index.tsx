@@ -8,7 +8,7 @@ import { useState } from "react";
 import Categories from "./AirBnbYourHomeModalContainer/Categories";
 import Locations from "./Locations";
 import Info from "./Info";
-import PropertyImage from "./Image";
+import PropertyImage from "./PropertyImage";
 import Description from "./Description";
 import Price from "./Price";
 import { IProperty } from "@/app/types";
@@ -37,7 +37,7 @@ const INITIAL_STATE = {
   guestCount: 1,
   roomCount: 1,
   bathroomCount: 1,
-  imageSrc: "",
+  imageSrc: [],
   price: 1,
   title: "",
   description: "",
@@ -54,10 +54,12 @@ const AirbnbYourHomeModal = () => {
   // reset state and step
   const handleReset = () => {
     setStep(0);
-    setData(INITIAL_STATE);
+    setData({ ...INITIAL_STATE, categories: [], imageSrc: [] });
   };
 
   const handleSubmit = () => {
+    console.log({ data });
+
     setIsLoading(true);
     axios
       .post("/api/properties", data)

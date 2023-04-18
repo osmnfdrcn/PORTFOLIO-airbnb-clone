@@ -37,6 +37,7 @@ const AirBnbYourHomeModalContainer = ({
           fixed inset-0 z-50 
           outline-none focus:outline-none 
           bg-neutral-800/70 
+
         "
       >
         <div

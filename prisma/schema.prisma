@@ -55,11 +55,12 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
+
 model Properties {
   id             String @id @default(auto()) @map("_id") @db.ObjectId
   title String
   description String
-  imageSrc String
+  imageSrc String[]
   createdAt DateTime @default(now())
   categories  String[]
   roomCount Int

@@ -2,7 +2,7 @@
 
 import { CldUploadWidget } from "next-cloudinary";
 import Image from "next/image";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { TbPhotoPlus } from "react-icons/tb";
 
 declare global {
@@ -12,17 +12,19 @@ declare global {
 const uploadPreset = "yu4jqpqr";
 
 interface ImageUploadProps {
-  onChange: (value: string) => void;
-  value: string;
+  onChange: (value: string[]) => void;
+  value: string[];
 }
 
 const ImageUpload = ({ onChange, value }: ImageUploadProps) => {
+  const [images, setImages] = useState<string[]>([]);
+
   const handleUpload = useCallback(
     (result: any) => {
-      console.log({ result });
-      onChange(result.info.secure_url);
+      setImages([...images, result.info.secure_url]);
+      onChange(images);
     },
-    [onChange]
+    [onChange, images]
   );
 
   return (
@@ -31,7 +33,7 @@ const ImageUpload = ({ onChange, value }: ImageUploadProps) => {
       uploadPreset={uploadPreset}
       options={{
         maxFileSize: 1024000,
-        maxFiles: 3,
+        maxFiles: 10,
       }}
     >
       {({ open }) => {
@@ -65,7 +67,7 @@ const ImageUpload = ({ onChange, value }: ImageUploadProps) => {
                 <Image
                   fill
                   style={{ objectFit: "cover" }}
-                  src={value}
+                  src={value[0]}
                   alt="House"
                 />
               </div>

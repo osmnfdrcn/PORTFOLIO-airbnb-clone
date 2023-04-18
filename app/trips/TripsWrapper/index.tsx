@@ -19,7 +19,6 @@ interface TripsWrapperProps {
 const TripsWrapper = ({ reservations, currentUser }: TripsWrapperProps) => {
   const router = useRouter();
   const [deletingId, setDeletingId] = useState("");
-  console.log({ reservations });
 
   const onCancel = useCallback(
     (id: string) => {
@@ -60,7 +59,7 @@ const TripsWrapper = ({ reservations, currentUser }: TripsWrapperProps) => {
           gap-8
         "
       >
-        {reservations.map((reservation: any) => (
+        {reservations?.map((reservation: any) => (
           <PropertyCard
             key={reservation.id}
             data={reservation.property}
