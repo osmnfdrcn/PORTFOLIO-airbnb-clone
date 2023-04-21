@@ -17,7 +17,7 @@ interface ModalProps {
   secondaryActionText?: string;
 }
 
-const AuthModalContainer = (props: ModalProps) => {
+const ModalContainer = (props: ModalProps) => {
   const {
     isOpen,
     onClose,
@@ -142,4 +142,4 @@ const AuthModalContainer = (props: ModalProps) => {
   );
 };
 
-export default AuthModalContainer;
+export default ModalContainer;

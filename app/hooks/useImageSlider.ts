@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { boolean } from "yup";
 
 function useImageSlider(
   images: string[],

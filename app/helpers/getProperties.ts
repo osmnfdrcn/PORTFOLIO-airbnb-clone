@@ -9,6 +9,7 @@ export interface IPropertiesParams {
   endDate?: string;
   locationValue?: string;
   category?: string;
+  price?: number;
 }
 
 export default async function getProperties(params: IPropertiesParams) {
@@ -21,6 +22,7 @@ export default async function getProperties(params: IPropertiesParams) {
       locationValue,
       startDate,
       endDate,
+      price,
       category: categoryParameter,
     } = params;
     // console.log({ params });
@@ -32,7 +34,9 @@ export default async function getProperties(params: IPropertiesParams) {
     roomCount ? (query.roomCount = { gte: +roomCount }) : null;
     guestCount ? (query.guestCount = { gte: +guestCount }) : null;
     bathroomCount ? (query.bathroomCount = { gte: +bathroomCount }) : null;
-    locationValue ? (query.locationValue = locationValue) : null;
+    price ? (query.price = { lte: +price }) : null;
+
+    locationValue ? (query.locationValue = { contains: locationValue }) : null;
     if (startDate && endDate) {
       query.NOT = {
         reservations: {
@@ -58,14 +62,12 @@ export default async function getProperties(params: IPropertiesParams) {
         createdAt: "desc",
       },
     });
-    console.log(propertyList);
 
     // date serialization problem
     const safePropertyList = propertyList.map((property) => ({
       ...property,
       createdAt: property.createdAt.toISOString(),
     }));
-    console.log({ safePropertyList });
 
     return safePropertyList;
   } catch (error: any) {

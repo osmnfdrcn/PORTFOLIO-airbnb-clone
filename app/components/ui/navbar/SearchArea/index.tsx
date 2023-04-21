@@ -1,7 +1,10 @@
-("use clint");
+"use client";
+import useSearchModal from "@/app/hooks/useSearchModal";
 import { BiSearch } from "react-icons/bi";
 
 const SearchArea = () => {
+  const searchModal = useSearchModal();
+
   return (
     <div
       className="
@@ -11,6 +14,7 @@ const SearchArea = () => {
         text-sm text-gray-600
         shadow-sm hover:shadow-md 
         transition cursor-pointer"
+      onClick={searchModal.onOpen}
     >
       <div className="flex flex-row items-center justify-between">
         {/* location input */}

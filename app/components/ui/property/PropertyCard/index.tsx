@@ -94,6 +94,8 @@ const PropertyCard = ({
         >
           <>
             <Image
+              onMouseOver={() => setShowImageArrows(true)}
+              onMouseOut={() => setShowImageArrows(false)}
               fill
               className="
               object-cover 
@@ -104,20 +106,26 @@ const PropertyCard = ({
               alt="Properties"
             />
 
-            <div className="w-full flex justify-between absolute z-10 top-[47%]">
-              <button
-                className="w-7 h-7 hover:w-8 hover:h-8 transition-all duration-300 ease-in-out rounded-full bg-neutral-200 text-stone-600 p-1 flex justify-center items-center"
-                onClick={(e) => handleImage(e, "back")}
+            {showImageArrows ? (
+              <div
+                className="w-full flex justify-between absolute z-10 top-[47%]"
+                onMouseOver={() => setShowImageArrows(true)}
+                onMouseOut={() => setShowImageArrows(false)}
               >
-                {"<"}
-              </button>
-              <button
-                className="w-7 h-7 hover:w-8 hover:h-8 transition-all duration-300 ease-in-out rounded-full bg-neutral-200 text-stone-600 p-1 flex justify-center items-center"
-                onClick={(e) => handleImage(e, "next")}
-              >
-                {">"}
-              </button>
-            </div>
+                <button
+                  className="w-7 h-7 hover:w-8 hover:h-8 transition-all duration-300 ease-in-out rounded-full bg-neutral-200 text-stone-600 p-1 flex justify-center items-center"
+                  onClick={(e) => handleImage(e, "back")}
+                >
+                  {"<"}
+                </button>
+                <button
+                  className="w-7 h-7 hover:w-8 hover:h-8 transition-all duration-300 ease-in-out rounded-full bg-neutral-200 text-stone-600 p-1 flex justify-center items-center"
+                  onClick={(e) => handleImage(e, "next")}
+                >
+                  {">"}
+                </button>
+              </div>
+            ) : null}
           </>
 
           <div

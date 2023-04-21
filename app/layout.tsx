@@ -6,6 +6,7 @@ import NotificationProvider from "./providers/NotificationProvider";
 import LoginModal from "./components/ui/modals/AuthModals/LoginModal";
 import AirbnbYourHomeModal from "./components/ui/modals/AirbnbYourHomeModal";
 import getCurrentUser from "./helpers/getCurrentUser";
+import SearchModal from "./components/ui/modals/SearchModal";
 export const metadata = {
   title: "AIRBNB CLONE",
   description: "An AIRBNB Clone",
@@ -28,6 +29,7 @@ export default async function RootLayout({
         <LoginModal />
         <RegisterModal />
         <AirbnbYourHomeModal />
+        <SearchModal />
         <Navbar currentUser={currentUser} />
         <div className="pb-20 pt-[200px]">{children}</div>
       </body>

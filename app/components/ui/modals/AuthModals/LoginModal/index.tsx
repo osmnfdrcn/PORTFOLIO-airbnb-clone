@@ -12,7 +12,7 @@ import { FcGoogle } from "react-icons/fc";
 import Button from "../../../../base/Button";
 import Heading from "../../../../base/Heading";
 import FormInput from "../../../../base/inputs/AuthFormTextInput";
-import AuthModalContainer from "../AuthModalContainer";
+import AuthModalContainer from "../../ModalContainer";
 import RegisterModalSchema from "./LoginModalSchema";
 
 const LoginModal = () => {

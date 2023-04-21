@@ -4,11 +4,13 @@ import Container from "./components/layout/Container";
 import getProperties, { IPropertiesParams } from "@/app/helpers/getProperties";
 import getCurrentUser from "@/app/helpers/getCurrentUser";
 import PropertyCard from "./components/ui/property/PropertyCard";
+import Loading from "./loading";
 interface IHome {
   searchParams: IPropertiesParams;
 }
 const Home = async ({ searchParams }: IHome) => {
   const properties = await getProperties(searchParams);
+
   const currentUser = await getCurrentUser();
   if (!properties?.length) {
     return <NoResult showReset />;
