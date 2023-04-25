@@ -28,7 +28,7 @@ const Map = ({ center }: MapProps) => {
       center={center as L.LatLngExpression}
       zoom={center ? 7 : 2}
       scrollWheelZoom={false}
-      className="h-[35vh] rounded-lg"
+      className="h-[45vh] rounded-lg"
     >
       <TileLayer url={url} attribution={attribution} />
       {center && <Marker position={center as L.LatLngExpression} />}

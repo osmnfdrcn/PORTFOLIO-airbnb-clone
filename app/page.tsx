@@ -17,17 +17,20 @@ const Home = async ({ searchParams }: IHome) => {
   }
   return (
     <Container>
-      <div
-        className="bg-gray grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 
-      lg:grid-cols-4 xl:grid-cols-5 gap-8"
-      >
-        {properties.map((property: any) => (
-          <PropertyCard
-            currentUser={currentUser}
-            key={property.id}
-            data={property}
-          />
-        ))}
+      <div className="flex gap-4">
+        <div
+          className="w-3/5 bg-gray grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 
+      lg:grid-cols-3 xl:grid-cols-3 gap-8"
+        >
+          {properties.map((property: any) => (
+            <PropertyCard
+              currentUser={currentUser}
+              key={property.id}
+              data={property}
+            />
+          ))}
+        </div>
+        <div className="w-2/5 bg-slate-200 h-[70vh]">MAP</div>
       </div>
     </Container>
   );

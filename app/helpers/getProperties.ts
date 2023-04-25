@@ -61,6 +61,9 @@ export default async function getProperties(params: IPropertiesParams) {
       orderBy: {
         createdAt: "desc",
       },
+      include: {
+        reviews: true,
+      },
     });
 
     // date serialization problem

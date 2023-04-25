@@ -16,79 +16,63 @@ import { MdOutlineVilla } from "react-icons/md";
 
 export const categoryList = [
   {
-    label: "Arctic",
-    icon: BsSnow,
+    label: "OMG",
+    image: "/images/icons/omg.jpeg",
     description: "This property is in arctic environment!",
   },
   {
-    label: "Barns",
-    icon: GiBarn,
+    label: "Cabins",
+    image: "/images/icons/cabins.jpeg",
     description: "This property is in a barn!",
   },
   {
-    label: "Beach",
-    icon: TbBeach,
+    label: "Design",
+    image: "/images/icons/design.jpeg",
     description: "This property is close to the beach!",
   },
   {
-    label: "Camping",
-    icon: GiForestCamp,
+    label: "Farms",
+    image: "/images/icons/farms.jpeg",
     description: "This property offers camping activities!",
   },
   {
+    label: "Amazing Pools",
+    image: "/images/icons/amazing-pools.jpeg",
+    description: "This property is in arctic environment!",
+  },
+  {
+    label: "Amazing Views",
+    image: "/images/icons/amazing-views.jpeg",
+    description: "This property is in a barn!",
+  },
+  {
+    label: "Beach Front",
+    image: "/images/icons/beach-front.jpeg",
+    description: "This property is close to the beach!",
+  },
+  {
     label: "Castles",
-    icon: GiCastle,
-    description: "This property is an ancient castle!",
+    image: "/images/icons/castles.jpeg",
+    description: "This property offers camping activities!",
   },
   {
-    label: "Caves",
-    icon: GiCaveEntrance,
-    description: "This property is in a spooky cave!",
-  },
-
-  {
-    label: "Countryside",
-    icon: TbMountain,
-    description: "This property is in the countryside!",
+    label: "Mansions",
+    image: "/images/icons/mansions.jpeg",
+    description: "This property is close to the beach!",
   },
   {
-    label: "Desert",
-    icon: GiCactus,
-    description: "This property is in the desert!",
+    label: "Private Rooms",
+    image: "/images/icons/private-rooms.jpeg",
+    description: "This property offers camping activities!",
   },
   {
-    label: "Islands",
-    icon: GiIsland,
-    description: "This property is on an island!",
+    label: "Trendings",
+    image: "/images/icons/trending.jpeg",
+    description: "This property is close to the beach!",
   },
   {
-    label: "Lake",
-    icon: GiBoatFishing,
-    description: "This property is near a lake!",
-  },
-  {
-    label: "Lux",
-    icon: IoDiamond,
-    description: "This property is brand new and luxurious!",
-  },
-  {
-    label: "Modern",
-    icon: MdOutlineVilla,
-    description: "This property is modern!",
-  },
-  {
-    label: "Pools",
-    icon: TbPool,
-    description: "This is property has a beautiful pool!",
-  },
-  {
-    label: "Skiing",
-    icon: FaSkiing,
-    description: "This property has skiing activies!",
-  },
-  {
-    label: "Windmills",
-    icon: GiWindmill,
-    description: "This property has windmills!",
+    label: "Tiny Homes",
+    image: "/images/icons/tiny-homes.jpeg",
+    description: "This property offers camping activities!",
   },
 ];

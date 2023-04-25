@@ -6,7 +6,7 @@ import { useCallback, useMemo, useState } from "react";
 import { IProperties, IReservation, IUser } from "@/app/types";
 import { Button, Heart } from "@/app/components/base";
 import useImageSlider from "@/app/hooks/useImageSlider";
-import { string } from "yup";
+import { AiOutlineStar } from "react-icons/ai";
 
 interface PropertyCardProps {
   data: IProperties;
@@ -32,6 +32,15 @@ const PropertyCard = ({
   const country = location[location?.length - 1];
   const city = location[0];
   const [showImageArrows, setShowImageArrows] = useState(false);
+
+  const rating = data?.reviews?.length
+    ? (
+        data?.reviews.reduce(
+          (total, item) => total + item.cumulativeRating,
+          0
+        ) / data?.reviews.length
+      ).toFixed(1)
+    : 0;
 
   const [currentImage, handlePrevImage, handleNextImage] = useImageSlider(
     data?.imageSrc,
@@ -141,15 +150,28 @@ const PropertyCard = ({
             ) : null}
           </div>
         </div>
-        <div className="font-semibold text-sm">
-          {city}
-          {", "}
-          {country}
-        </div>
+        <div className="flex flex-col">
+          <div className="flex justify-between">
+            <div className=" text-sm">
+              {city}
+              {", "}
+              {country}
+            </div>
+            <div className="font-semibold text-sm flex items-center">
+              {" "}
+              {rating ? rating : "NEW"}{" "}
+              <AiOutlineStar
+                size={20}
+                className="text-yellow-500 font-extrabold"
+              />
+            </div>
+          </div>
 
-        <div className="flex flex-row items-center gap-1">
-          <div className="font-semibold">$ {price}</div>
-          {!reservation && <div className="font-light">night</div>}
+          <div className="flex flex-row items-center gap-1 -mt-2">
+            <div className="font-semibold">$ {price}</div>
+
+            {!reservation && <div className="font-light s">night</div>}
+          </div>
         </div>
 
         {onAction && actionLabel && (

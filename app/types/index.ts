@@ -1,18 +1,29 @@
-import { Properties, Reservation, User } from "@prisma/client";
+import { Properties, Reservation, User, Review } from "@prisma/client";
 
 // date serialization problems
+//Warning: Only plain objects can be passed to Client Components from Server Components. Date objects are not supported.
+
 export type IProperties = Omit<Properties, "createdAt"> & {
   createdAt: string;
+  reviews: IReview[] | null;
+  reservations: IReservation[];
+};
+
+export type IReview = Omit<Review, "createdAt" | "user" | "property"> & {
+  createdAt: string;
+  user: IUser[];
+  property: IProperties;
 };
 
 export type IReservation = Omit<
   Reservation,
-  "createdAt" | "startDate" | "endDate" | "listing"
+  "createdAt" | "startDate" | "endDate" | "property"
 > & {
   createdAt: string;
   startDate: string;
   endDate: string;
-  listing: IProperties;
+  property: IProperties;
+  review?: IReview[];
 };
 
 export type IUser = Omit<User, "createdAt" | "updatedAt" | "emailVerified"> & {

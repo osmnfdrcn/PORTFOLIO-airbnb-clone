@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
+import { v4 as uuidv4 } from "uuid";
 
 import { IReservation, IUser } from "@/app/types";
 PropertyCard;
@@ -62,7 +63,7 @@ const ReservationWrapper = ({
       >
         {reservations.map((reservation: any) => (
           <PropertyCard
-            key={reservation.id}
+            key={uuidv4()}
             data={reservation.property}
             reservation={reservation}
             actionId={reservation.id}

@@ -7,6 +7,7 @@ import LoginModal from "./components/ui/modals/AuthModals/LoginModal";
 import AirbnbYourHomeModal from "./components/ui/modals/AirbnbYourHomeModal";
 import getCurrentUser from "./helpers/getCurrentUser";
 import SearchModal from "./components/ui/modals/SearchModal";
+import ReviewModal from "./properties/ReviewModal";
 export const metadata = {
   title: "AIRBNB CLONE",
   description: "An AIRBNB Clone",

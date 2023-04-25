@@ -1,4 +1,5 @@
 "use client";
+import { v4 as uuidv4 } from "uuid";
 
 import { usePathname, useSearchParams } from "next/navigation";
 import { categoryList } from "@/app/config/categoryList";
@@ -17,15 +18,15 @@ const Categories = () => {
     <Container>
       <div
         className="
-          flex flex-row items-center justify-between
+          flex flex-row items-center justify-start
           pt-4
           overflow-x-auto"
       >
         {categoryList.map((item) => (
           <CategoryBox
-            key={item.label}
+            key={uuidv4()}
             label={item.label}
-            icon={item.icon}
+            image={item.image}
             selected={category === item.label}
           />
         ))}

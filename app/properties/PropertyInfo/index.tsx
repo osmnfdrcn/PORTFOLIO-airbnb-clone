@@ -1,11 +1,12 @@
 "use client";
-
 import dynamic from "next/dynamic";
 import { IconType } from "react-icons";
-import { IUser } from "@/app/types";
+import { IReview, IUser } from "@/app/types";
 import PropertyCategory from "../PropertyCategory";
 import { Avatar } from "@/app/components/base";
-
+import Reviews from "../Reviews";
+import { v4 as uuidv4 } from "uuid";
+import Ratings from "../Reviews/Ratings";
 const Map = dynamic(
   () => import("../../components/ui/modals/AirbnbYourHomeModal/Map"),
   {
@@ -14,6 +15,7 @@ const Map = dynamic(
 );
 
 interface PropertyInfoProps {
+  propertyId: string;
   isYourProperty: boolean;
   user: IUser;
   description: string;
@@ -23,7 +25,7 @@ interface PropertyInfoProps {
   categories:
     | [
         {
-          icon: IconType;
+          image: string;
           label: string;
           description: string;
         }
@@ -31,9 +33,11 @@ interface PropertyInfoProps {
     | undefined;
   locationValue: string;
   coordinates: number[];
+  reviews?: IReview[] | null;
 }
 
 const PropertyInfo = ({
+  propertyId,
   isYourProperty,
   user,
   description,
@@ -42,6 +46,7 @@ const PropertyInfo = ({
   bathroomCount,
   categories,
   coordinates,
+  reviews,
 }: PropertyInfoProps) => {
   return (
     <div className="col-span-4 flex flex-col gap-8">
@@ -75,12 +80,11 @@ const PropertyInfo = ({
         </div>
       </div>
       <hr />
-
       {categories?.map((c) => {
         return (
           <PropertyCategory
-            key={c.label}
-            icon={c.icon}
+            key={uuidv4()}
+            image={c.image}
             label={c?.label}
             description={c?.description}
           />
@@ -94,6 +98,7 @@ const PropertyInfo = ({
         {description}
       </div>
       <hr />
+
       <Map center={coordinates} />
     </div>
   );

@@ -3,15 +3,15 @@
 import qs from "query-string";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
-import { IconType } from "react-icons";
+import Image from "next/image";
 
 interface CategoryBoxProps {
-  icon: IconType;
+  image: string;
   label: string;
   selected?: boolean;
 }
 
-const CategoryBox = ({ icon: Icon, label, selected }: CategoryBoxProps) => {
+const CategoryBox = ({ image, label, selected }: CategoryBoxProps) => {
   const router = useRouter();
   const params = useSearchParams();
 
@@ -45,7 +45,13 @@ const CategoryBox = ({ icon: Icon, label, selected }: CategoryBoxProps) => {
         ${selected ? "text-neutral-800" : "text-neutral-500"}
       `}
     >
-      <Icon size={16} />
+      <Image
+        src={image}
+        width={24}
+        height={24}
+        alt={label}
+        className="brightness-0"
+      />
       <div className="font-medium text-[12px] md:text-[14px]">{label}</div>
     </div>
   );

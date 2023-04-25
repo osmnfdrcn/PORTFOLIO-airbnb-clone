@@ -1,5 +1,6 @@
 import { Button, Counter, Heading } from "@/app/components/base";
 import { AirbnbYourHomeModalComponentsProps } from "..";
+import { v4 as uuidv4 } from "uuid";
 
 type Counter = {
   id: number;
@@ -53,7 +54,7 @@ const Info = ({
       />
       {counters.map((counter) => (
         <Counter
-          key={counter.id}
+          key={uuidv4()}
           onChange={counter.onChange}
           value={counter.value}
           title={counter.title}

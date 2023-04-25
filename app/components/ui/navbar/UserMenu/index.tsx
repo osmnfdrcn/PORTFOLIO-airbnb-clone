@@ -65,7 +65,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
       {isUserMenuOpen && (
         <div
           className="
-            absolute right-0 top-12
+            absolute z-10 right-0 top-12
             w-[40vw] md:w-3/4 bg-white text-sm
             rounded-xl shadow-md
             overflow-hidden"

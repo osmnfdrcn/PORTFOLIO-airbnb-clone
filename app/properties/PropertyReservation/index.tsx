@@ -2,6 +2,7 @@
 
 import { Button, Calendar } from "@/app/components/base";
 import { Range } from "react-date-range";
+import { differenceInDays, eachDayOfInterval } from "date-fns";
 
 interface PropertyReservationProps {
   price: number;
@@ -22,6 +23,8 @@ const PropertyReservation = ({
   disabled,
   disabledDates,
 }: PropertyReservationProps) => {
+  const dayCount = differenceInDays(dateRange.endDate!, dateRange.startDate!);
+
   return (
     <div
       className="
@@ -30,7 +33,7 @@ const PropertyReservation = ({
         border-[1px]
       border-neutral-200 
         overflow-hidden
-        sticky top-[100px]
+        sticky top-[110px]
       "
     >
       <div
@@ -66,8 +69,28 @@ const PropertyReservation = ({
           text-lg
         "
       >
-        <div>Total</div>
-        <div>$ {totalPrice}</div>
+        <div className="flex flex-col gap-2 w-full text-sm font-light">
+          <div className="flex justify-between w-full ">
+            <p className="underline">
+              ${price} x {dayCount}
+              {" nights"}
+            </p>
+            <p> ${totalPrice}</p>
+          </div>
+          <div className="flex justify-between w-full ">
+            <p className="underline">Cleaning Fee</p>
+            <p> $0</p>
+          </div>
+          <div className="flex justify-between w-full ">
+            <p className="underline">Airbnb Service Fee</p>
+            <p> $0</p>
+          </div>
+          <hr />
+          <div className="flex justify-between w-full font-semibold">
+            <p>Total</p>
+            <p> ${totalPrice}</p>
+          </div>
+        </div>
       </div>
     </div>
   );

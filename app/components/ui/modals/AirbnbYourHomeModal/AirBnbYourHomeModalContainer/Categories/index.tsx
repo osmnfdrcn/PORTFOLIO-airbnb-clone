@@ -1,4 +1,6 @@
 "use client";
+import { v4 as uuidv4 } from "uuid";
+
 import { Button, CategoryInput, Heading } from "@/app/components/base";
 import { categoryList } from "@/app/config/categoryList";
 import { AirbnbYourHomeModalComponentsProps } from "../..";
@@ -22,8 +24,8 @@ const Categories = ({
           grid grid-cols-2 md:grid-cols-3 gap-3  
           max-h-[50vh] overflow-y-auto"
       >
-        {categoryList.map(({ label, icon }) => (
-          <div key={label} className="col-span-1">
+        {categoryList.map(({ label, image }) => (
+          <div key={uuidv4()} className="col-span-1">
             <CategoryInput
               onClick={(arr) => {
                 handleData({ ...data, categories: arr });
@@ -31,7 +33,7 @@ const Categories = ({
               category={data.categories}
               selected={data.categories.includes(label)}
               label={label}
-              icon={icon}
+              image={image}
             />
           </div>
         ))}

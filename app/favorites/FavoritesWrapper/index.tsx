@@ -2,6 +2,7 @@ import { Heading } from "@/app/components/base";
 import Container from "@/app/components/layout/Container";
 import PropertyCard from "@/app/components/ui/property/PropertyCard";
 import { IProperty, IUser } from "@/app/types";
+import { v4 as uuidv4 } from "uuid";
 
 interface FavoritesWrapperProps {
   properties: IProperty[];
@@ -31,7 +32,7 @@ const FavoritesWrapper = ({
         {properties.map((property: any) => (
           <PropertyCard
             currentUser={currentUser}
-            key={property.id}
+            key={uuidv4()}
             data={property}
           />
         ))}

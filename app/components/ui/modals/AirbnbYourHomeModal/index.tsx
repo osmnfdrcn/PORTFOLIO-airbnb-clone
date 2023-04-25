@@ -29,6 +29,7 @@ export type AirbnbYourHomeModalComponentsProps = {
   handleStep: (value: number) => void;
   data: IProperty;
   step: number;
+  value?: number[];
 };
 
 const INITIAL_STATE = {

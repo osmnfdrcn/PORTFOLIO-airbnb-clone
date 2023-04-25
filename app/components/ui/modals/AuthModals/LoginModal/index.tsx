@@ -1,4 +1,5 @@
 "use client";
+import Container from "@/app/components/layout/Container";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -120,6 +121,13 @@ const LoginModal = () => {
       </div>
     </div>
   );
+  if (isLoading) {
+    return (
+      <Container>
+        <div className="mt-[200px]">Loading...</div>
+      </Container>
+    );
+  }
   return (
     <AuthModalContainer
       disabled={isLoading}

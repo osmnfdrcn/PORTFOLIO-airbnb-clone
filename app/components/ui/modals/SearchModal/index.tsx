@@ -83,7 +83,7 @@ const SearchModal = () => {
       guestCount,
       roomCount,
       bathroomCount,
-      price,
+      price: price > 0 && price,
     };
 
     if (dateRange.startDate) {

@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { useMemo, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { AirbnbYourHomeModalComponentsProps } from "..";
-// import Map from "../Map";
+import { v4 as uuidv4 } from "uuid";
 
 const NOMINATIM_BASE_URL = "https://nominatim.openstreetmap.org/search?";
 
@@ -108,7 +108,7 @@ const Locations = ({
 
         {listPlace.map((item: ILocation) => (
           <p
-            key={item?.place_id}
+            key={uuidv4()}
             className="hover:text-black cursor-pointer"
             onClick={() => handleLocationClick(item)}
           >

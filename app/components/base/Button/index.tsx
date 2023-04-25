@@ -22,13 +22,14 @@ function Button(props: ButtonProps) {
         rounded-lg 
         disabled:opacity-70 disabled:cursor-not-allowed 
         hover:opacity-80 
+        bg-gradient-to-r from-pink-400 to-rose-600
         transition} 
         ${
           outline
             ? "bg-neutral-100 border-black text-black"
             : "bg-rose-500 border-rose-500 text-white"
         }
-        ${narrow && "bg-green-400 text-white"}
+        ${narrow && "bg-green-400 text-white w-[100px]"}
         ${
           small
             ? "py-1 text-sm font-light border-[1px]"

@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
+import { v4 as uuidv4 } from "uuid";
 
 import { IReservation, IUser } from "@/app/types";
 
@@ -19,6 +20,10 @@ interface TripsWrapperProps {
 const TripsWrapper = ({ reservations, currentUser }: TripsWrapperProps) => {
   const router = useRouter();
   const [deletingId, setDeletingId] = useState("");
+
+  // const date = new Date();
+  // const dayCount2 = differenceInDays(dateRange.endDate!, date);
+  // console.log({ dayCount2 });
 
   const onCancel = useCallback(
     (id: string) => {
@@ -60,8 +65,9 @@ const TripsWrapper = ({ reservations, currentUser }: TripsWrapperProps) => {
         "
       >
         {reservations?.map((reservation: any) => (
+          //  cancel islemi yapilabilir mi burada kontrol edileck
           <PropertyCard
-            key={reservation.id}
+            key={uuidv4()}
             data={reservation.property}
             reservation={reservation}
             actionId={reservation.id}

@@ -10,16 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Country {
-  id              String @id @default(auto()) @map("_id") @db.ObjectId
-  label            String
-  flag           String
-  latlng          String[]
-  region           String
-  value           String
-}
-
-
 model User {
   id              String @id @default(auto()) @map("_id") @db.ObjectId
   name            String?
@@ -30,10 +20,11 @@ model User {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
   favoriteIds     String[] @db.ObjectId
-
   accounts Account[]
   properties Properties[]
   reservations Reservation[]
+  reviews Review[]
+
 }
 
 model Account {
@@ -49,9 +40,7 @@ model Account {
   scope              String?
   id_token           String?  @db.String
   session_state      String?
-
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
   @@unique([provider, providerAccountId])
 }
 
@@ -70,9 +59,10 @@ model Properties {
   coordinates Float[]
   userId String @db.ObjectId
   price Int
-
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   reservations Reservation[]
+  reviews Review[]
+
 }
 
 model Reservation {
@@ -83,7 +73,29 @@ model Reservation {
   endDate DateTime
   totalPrice Int
   createdAt DateTime @default(now())
-
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   property Properties @relation(fields: [propertyId], references: [id], onDelete:Cascade)
+  review Review?
+}
+
+model Review {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  userName String
+  userImage String
+  propertyId String @db.ObjectId  
+  cleanliness Float
+  reviewText String
+  location Float
+  value Float
+  checkIn Float
+  communication Float
+  accuracy Float
+  cumulativeRating Float
+  createdAt DateTime @default(now())
+  property Properties @relation(fields: [propertyId], references: [id], onDelete:Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reservation   Reservation   @relation(fields: [reservationId], references: [id])
+  reservationId String @unique @db.ObjectId 
+
 }

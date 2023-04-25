@@ -8,27 +8,29 @@ export default async function getPropertiesById(params: IParams) {
   try {
     const { propertyId } = params;
 
-    const properties = await prisma.properties.findUnique({
+    const property = await prisma.properties.findUnique({
       where: {
         id: propertyId,
       },
       include: {
         user: true,
+        reviews: true,
+        reservations: true,
       },
     });
 
-    if (!properties) {
+    if (!property) {
       return null;
     }
 
     return {
-      ...properties,
-      createdAt: properties.createdAt.toString(),
+      ...property,
+      createdAt: property.createdAt.toString(),
       user: {
-        ...properties.user,
-        createdAt: properties.user.createdAt.toString(),
-        updatedAt: properties.user.updatedAt.toString(),
-        emailVerified: properties.user.emailVerified?.toString() || null,
+        ...property.user,
+        createdAt: property.user.createdAt.toString(),
+        updatedAt: property.user.updatedAt.toString(),
+        emailVerified: property.user.emailVerified?.toString() || null,
       },
     };
   } catch (error: any) {

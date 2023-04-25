@@ -9,6 +9,7 @@ import { IProperty, IUser } from "@/app/types";
 import { Heading } from "../../components/base";
 import Container from "../../components/layout/Container";
 import PropertyCard from "../../components/ui/property/PropertyCard";
+import { v4 as uuidv4 } from "uuid";
 
 interface MyPropertiesWrapperProps {
   properties: IProperty[];
@@ -58,9 +59,9 @@ const MyPropertiesWrapper = ({
           gap-8
         "
       >
-        {properties.map((property: any) => (
+        {properties?.map((property: any) => (
           <PropertyCard
-            key={property.id}
+            key={uuidv4()}
             data={property}
             actionId={property.id}
             onAction={onDelete}
