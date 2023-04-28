@@ -59,8 +59,6 @@ const AirbnbYourHomeModal = () => {
   };
 
   const handleSubmit = () => {
-    console.log({ data });
-
     setIsLoading(true);
     axios
       .post("/api/properties", data)

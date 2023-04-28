@@ -89,16 +89,16 @@ const PropertyCard = ({
   return (
     <div
       onClick={() => router.push(`/properties/${data.id}`)}
-      className="col-span-1 cursor-pointer group"
+      className="col-span-1 cursor-pointer group bg-slate-100"
     >
-      <div className="flex flex-col gap-2 w-full">
+      <div className="flex flex-col gap-2 w-full h-400px">
         <div
           className="
             aspect-square 
             w-full 
+            h-[300px]
             relative 
             overflow-hidden 
-            rounded-xl
           "
         >
           <>
@@ -108,7 +108,6 @@ const PropertyCard = ({
               fill
               className="
               object-cover 
-              h-full 
               w-full 
             "
               src={currentImage as string}
@@ -150,7 +149,7 @@ const PropertyCard = ({
             ) : null}
           </div>
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col p-2">
           <div className="flex justify-between">
             <div className=" text-sm">
               {city}
