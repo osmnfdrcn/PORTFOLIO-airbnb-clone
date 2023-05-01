@@ -2,13 +2,10 @@
 
 import Image from "next/image";
 
-import { IUser } from "@/app/types";
 import { Heading, Heart } from "@/app/components/base";
 import useImageSlider from "@/app/hooks/useImageSlider";
-import { useCallback, useState } from "react";
-import { TfiLayoutSlider } from "react-icons/tfi";
-import { RiLayoutMasonryLine } from "react-icons/ri";
-import { v4 as uuidv4 } from "uuid";
+import { IUser } from "@/app/types";
+import { useCallback } from "react";
 
 interface PropertyHeadProps {
   title: string;
@@ -16,6 +13,7 @@ interface PropertyHeadProps {
   imageSrc: string[];
   id: string;
   currentUser?: IUser | null;
+  propertyOwnerId: string;
 }
 
 const PropertyHead = ({
@@ -23,6 +21,7 @@ const PropertyHead = ({
   locationValue,
   imageSrc,
   id,
+  propertyOwnerId,
   currentUser,
 }: PropertyHeadProps) => {
   const length = locationValue.split(",").length;
@@ -51,17 +50,9 @@ const PropertyHead = ({
     <>
       <Heading title={title} subTitle={`${region}, ${country}`} />
 
-      <div
-        className="
-          w-full
-          h-[60vh]
-          overflow-hidden 
-          rounded-xl
-          relative
-        "
-      >
+      <div className="w-full h-[60vh] overflow-hidden rounded-xl relative">
         <>
-          <div className="flex flex-col ">
+          <div className="flex flex-col w-full h-full">
             <Image
               src={currentImage as string}
               fill
@@ -84,14 +75,11 @@ const PropertyHead = ({
             </div>
           </div>
 
-          <div
-            className="
-            absolute
-            top-5
-            right-5
-          "
-          >
-            <Heart propertyId={id} currentUser={currentUser} />
+          <div className="absolute top-5 right-5">
+            {/* user cannot favorite its own property */}
+            {propertyOwnerId != currentUser?.id ? (
+              <Heart propertyId={id} currentUser={currentUser} />
+            ) : null}
           </div>
         </>
       </div>

@@ -43,7 +43,7 @@ const Categories = ({
           <Button
             text="Next"
             onClick={handleNextClick}
-            disabled={!data.categories}
+            disabled={!data.categories.length}
           />
         </div>
       </div>

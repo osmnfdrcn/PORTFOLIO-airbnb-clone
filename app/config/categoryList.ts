@@ -1,78 +1,130 @@
-import { TbBeach, TbMountain, TbPool } from "react-icons/tb";
-import {
-  GiBarn,
-  GiBoatFishing,
-  GiCactus,
-  GiCastle,
-  GiCaveEntrance,
-  GiForestCamp,
-  GiIsland,
-  GiWindmill,
-} from "react-icons/gi";
-import { FaSkiing } from "react-icons/fa";
-import { BsSnow } from "react-icons/bs";
-import { IoDiamond } from "react-icons/io5";
-import { MdOutlineVilla } from "react-icons/md";
-
 export const categoryList = [
+  {
+    label: "New",
+    image: "/images/icons/new.jpeg",
+    description: "This property is listed rcently!",
+  },
   {
     label: "OMG",
     image: "/images/icons/omg.jpeg",
+    description: "No idea what's that!",
+  },
+  {
+    label: "Adapted",
+    image: "/images/icons/adapted.jpeg",
+    description: "This property is handicapped friendly!",
+  },
+  {
+    label: "Arctic",
+    image: "/images/icons/arctic.jpeg",
     description: "This property is in arctic environment!",
+  },
+
+  {
+    label: "Beach",
+    image: "/images/icons/beach.jpeg",
+    description: "This property is close to beach!",
   },
   {
     label: "Cabins",
     image: "/images/icons/cabins.jpeg",
-    description: "This property is in a barn!",
+    description: "This property is a cabin!",
+  },
+  {
+    label: "Campers",
+    image: "/images/icons/campers.jpeg",
+    description: "This property is suitable for camping!",
+  },
+  {
+    label: "Caves",
+    image: "/images/icons/caves.jpeg",
+    description: "This property is close to caves!",
   },
   {
     label: "Design",
     image: "/images/icons/design.jpeg",
-    description: "This property is close to the beach!",
+    description: "This property has a outstanding design!",
   },
   {
     label: "Farms",
     image: "/images/icons/farms.jpeg",
-    description: "This property offers camping activities!",
-  },
-  {
-    label: "Amazing Pools",
-    image: "/images/icons/amazing-pools.jpeg",
-    description: "This property is in arctic environment!",
-  },
-  {
-    label: "Amazing Views",
-    image: "/images/icons/amazing-views.jpeg",
-    description: "This property is in a barn!",
-  },
-  {
-    label: "Beach Front",
-    image: "/images/icons/beach-front.jpeg",
-    description: "This property is close to the beach!",
+    description: "This property offers farming activities!",
   },
   {
     label: "Castles",
     image: "/images/icons/castles.jpeg",
+    description: "This property close to castles!",
+  },
+  {
+    label: "Containers",
+    image: "/images/icons/containers.jpeg",
+    description: "This property is built up with containers!",
+  },
+  {
+    label: "Desert",
+    image: "/images/icons/desert.jpeg",
+    description: "This property close to desert!",
+  },
+  {
+    label: "Domes",
+    image: "/images/icons/domes.jpeg",
     description: "This property offers camping activities!",
+  },
+  {
+    label: "Golfing",
+    image: "/images/icons/golfing.jpeg",
+    description: "This property offers golfing activities!",
+  },
+  {
+    label: "Islands",
+    image: "/images/icons/islands.jpeg",
+    description: "This property is close to the islands!",
+  },
+  {
+    label: "Lake",
+    image: "/images/icons/lake.jpeg",
+    description: "This property is close to the lakes!",
+  },
+  {
+    label: "Luxe",
+    image: "/images/icons/luxe.jpeg",
+    description: "This property offers a luxury ambiente !",
   },
   {
     label: "Mansions",
     image: "/images/icons/mansions.jpeg",
-    description: "This property is close to the beach!",
+    description: "This property is a mansion!",
+  },
+
+  {
+    label: "Skiing",
+    image: "/images/icons/skiing.jpeg",
+    description: "This property is  offers skiiing activities!",
   },
   {
-    label: "Private Rooms",
-    image: "/images/icons/private-rooms.jpeg",
-    description: "This property offers camping activities!",
+    label: "Surfing",
+    image: "/images/icons/surfing.jpeg",
+    description: "This property is  offers surfing activities!",
   },
+
   {
     label: "Trendings",
     image: "/images/icons/trending.jpeg",
-    description: "This property is close to the beach!",
+    description: "This property is in trends!",
   },
   {
-    label: "Tiny Homes",
-    image: "/images/icons/tiny-homes.jpeg",
-    description: "This property offers camping activities!",
+    label: "Towers",
+    image: "/images/icons/towers.jpeg",
+    description: "This property is close to the towers!",
+  },
+  {
+    label: "Vineyards",
+    image: "/images/icons/vineyards.jpeg",
+    description: "This property is close to the vineyards!",
+  },
+  {
+    label: "Windmills",
+    image: "/images/icons/windmills.jpeg",
+    description: "This property is close to the windmills!",
   },
 ];

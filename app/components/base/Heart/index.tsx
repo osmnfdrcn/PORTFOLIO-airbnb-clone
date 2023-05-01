@@ -19,21 +19,11 @@ const Heart = ({ propertyId, currentUser }: HeartProps) => {
   return (
     <div
       onClick={toggleFavorite}
-      className="
-        relative
-        hover:opacity-80
-        transition
-        cursor-pointer
-      "
+      className="relative hover:opacity-80 transition cursor-pointer"
     >
       <AiOutlineHeart
         size={28}
-        className="
-          fill-white
-          absolute
-          -top-[2px]
-          -right-[2px]
-        "
+        className="fill-white absolute -top-[2px] -right-[2px]"
       />
       <AiFillHeart
         size={24}

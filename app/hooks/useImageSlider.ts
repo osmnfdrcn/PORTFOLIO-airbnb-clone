@@ -6,16 +6,19 @@ function useImageSlider(
 ): [string, () => void, () => void] {
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
 
-  auto &&
-    useEffect(() => {
-      const interval = setInterval(() => {
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+
+    if (auto) {
+      interval = setInterval(() => {
         setCurrentImageIndex(
           (currentImageIndex) => (currentImageIndex + 1) % images.length
         );
-      }, 5000);
+      }, 3000);
+    }
 
-      return () => clearInterval(interval);
-    }, [images.length, currentImageIndex]);
+    return () => clearInterval(interval);
+  }, [auto, images.length]);
 
   function handlePrevImage(): void {
     setCurrentImageIndex(

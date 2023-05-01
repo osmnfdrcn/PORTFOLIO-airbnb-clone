@@ -1,15 +1,14 @@
 "use client";
 
-import { toast } from "react-hot-toast";
-import axios from "axios";
-import { useCallback, useState } from "react";
-import { useRouter } from "next/navigation";
-
+import { PropertyCard } from "@/app/components/ui";
 import { IProperty, IUser } from "@/app/types";
-import { Heading } from "../../components/base";
-import Container from "../../components/layout/Container";
-import PropertyCard from "../../components/ui/property/PropertyCard";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { useCallback, useState } from "react";
+import { toast } from "react-hot-toast";
 import { v4 as uuidv4 } from "uuid";
+import { Heading } from "../../components/base";
+import { Container } from "../../components/layout";
 
 interface MyPropertiesWrapperProps {
   properties: IProperty[];
@@ -44,21 +43,9 @@ const MyPropertiesWrapper = ({
   );
 
   return (
-    <Container>
+    <Container noCategories>
       <Heading title="Properties" subTitle="List of your properties" />
-      <div
-        className="
-          mt-10
-          grid 
-          grid-cols-1 
-          sm:grid-cols-2 
-          md:grid-cols-3 
-          lg:grid-cols-4
-          xl:grid-cols-5
-          2xl:grid-cols-6
-          gap-8
-        "
-      >
+      <div className="mt-10 grid grid-cols-1 sm:grid-cols-2       md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6          gap-8">
         {properties?.map((property: any) => (
           <PropertyCard
             key={uuidv4()}

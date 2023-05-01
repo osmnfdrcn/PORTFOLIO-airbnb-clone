@@ -1,4 +1,4 @@
-import NoResult from "../components/ui/property/NoResult";
+import { NoResult } from "@/app/components/ui";
 import getCurrentUser from "../helpers/getCurrentUser";
 import getReservations from "../helpers/getReservations";
 import ReservationWrapper from "./ReservationWrapper";

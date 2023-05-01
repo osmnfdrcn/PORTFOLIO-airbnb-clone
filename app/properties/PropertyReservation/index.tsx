@@ -26,25 +26,13 @@ const PropertyReservation = ({
   const dayCount = differenceInDays(dateRange.endDate!, dateRange.startDate!);
 
   return (
-    <div
-      className="
-      bg-white 
-        rounded-xl 
-        border-[1px]
-      border-neutral-200 
-        overflow-hidden
-        sticky top-[110px]
-      "
-    >
-      <div
-        className="
-      flex flex-row items-center justify-center gap-1 p-4"
-      >
+    <div className="bg-white rounded-xl border-[1px] border-neutral-200 overflow-hidden sticky top-[110px]">
+      <div className="flex flex-row items-center justify-center gap-1 p-4">
         <div className="text-2xl font-semibold">$ {price}</div>
         <div className="font-light text-neutral-600">night</div>
       </div>
       <hr />
-      <div className="        flex flex-col items-center justify-center ">
+      <div className="flex flex-col items-center justify-center ">
         <Calendar
           value={dateRange}
           disabledDates={disabledDates}
@@ -58,21 +46,13 @@ const PropertyReservation = ({
       </div>
       <hr />
       <div
-        className="
-          p-4 
-          flex 
-          flex-row 
-          items-center 
-          justify-center
-          gap-4
-          font-semibold
-          text-lg
-        "
+        className="p-4 flex flex-row items-center justify-center gap-4
+          font-semibold text-lg"
       >
         <div className="flex flex-col gap-2 w-full text-sm font-light">
           <div className="flex justify-between w-full ">
             <p className="underline">
-              ${price} x {dayCount}
+              ${price} x {!dayCount ? 1 : dayCount}
               {" nights"}
             </p>
             <p> ${totalPrice}</p>

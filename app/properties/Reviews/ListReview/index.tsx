@@ -28,7 +28,7 @@ const ListReview = ({ reviews }: Props) => {
                 </div>
 
                 <p className="text-sm text-slate-400">
-                  {format(parseISO(r.createdAt), "dd/MM/yy")}
+                  {format(r.createdAt, "PP")}
                 </p>
               </div>
             </div>

@@ -5,13 +5,10 @@ import axios from "axios";
 import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
-
 import { IReservation, IUser } from "@/app/types";
-PropertyCard;
-
 import { Heading } from "@/app/components/base";
-import Container from "@/app/components/layout/Container";
-import PropertyCard from "@/app/components/ui/property/PropertyCard";
+import { ReservationCard } from "@/app/components/ui";
+import { Container } from "@/app/components/layout";
 
 interface ReservationWrapperProps {
   reservations: IReservation[];
@@ -28,15 +25,14 @@ const ReservationWrapper = ({
   const onCancel = useCallback(
     (id: string) => {
       setDeletingId(id);
-
       axios
         .delete(`/api/reservations/${id}`)
         .then(() => {
           toast.success("Reservation cancelled");
           router.refresh();
         })
-        .catch(() => {
-          toast.error("Something went wrong.");
+        .catch((e) => {
+          console.log(e);
         })
         .finally(() => {
           setDeletingId("");
@@ -46,31 +42,18 @@ const ReservationWrapper = ({
   );
 
   return (
-    <Container>
+    <Container noCategories>
       <Heading title="Reservations" subTitle="Bookings on your properties" />
-      <div
-        className="
-          mt-10
-          grid 
-          grid-cols-1 
-          sm:grid-cols-2 
-          md:grid-cols-3 
-          lg:grid-cols-4
-          xl:grid-cols-5
-          2xl:grid-cols-6
-          gap-8
-        "
-      >
+      <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
         {reservations.map((reservation: any) => (
-          <PropertyCard
+          <ReservationCard
             key={uuidv4()}
             data={reservation.property}
             reservation={reservation}
             actionId={reservation.id}
             onAction={onCancel}
             disabled={deletingId === reservation.id}
-            actionLabel="Cancel guest reservation"
-            currentUser={currentUser}
+            actionLabel="Cancel"
           />
         ))}
       </div>

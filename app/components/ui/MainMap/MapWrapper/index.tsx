@@ -3,11 +3,11 @@ import { IProperties } from "@/app/types";
 import dynamic from "next/dynamic";
 import React, { useMemo } from "react";
 
-type Props = {
+type MapWrapperProps = {
   properties: IProperties[];
 };
 
-function MapWrapper({ properties }: Props) {
+function MapWrapper({ properties }: MapWrapperProps) {
   const locations = properties.map((p) => p.coordinates);
 
   const Map = useMemo(
@@ -15,9 +15,10 @@ function MapWrapper({ properties }: Props) {
       dynamic(() => import("../index"), {
         ssr: false,
         loading: () => (
-          <div className="animate-pulse h-[35vh] rounded-lg bg-neutral-200"></div>
+          <div className="animate-pulse h-[75vh] rounded-lg bg-neutral-200"></div>
         ), //find a better way to fix flickering
       }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [locations]
   );
 

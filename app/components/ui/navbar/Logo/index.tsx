@@ -8,8 +8,10 @@ const Logo = () => {
     <Image
       className="hidden md:block cursor-pointer"
       src={"/images/logo.png"}
-      width={100}
-      height={100}
+      width={250}
+      height={80}
+      style={{ width: "10%", height: "auto" }}
+      priority
       alt="airbnb logo"
       onClick={() => router.push("/")}
     />

@@ -1,11 +1,11 @@
 "use client";
-import { format } from "date-fns";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useCallback, useMemo, useState } from "react";
-import { IProperties, IReservation, IUser } from "@/app/types";
 import { Button, Heart } from "@/app/components/base";
 import useImageSlider from "@/app/hooks/useImageSlider";
+import { IProperties, IReservation, IUser } from "@/app/types";
+import { isPast } from "date-fns";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useCallback, useState } from "react";
 import { AiOutlineStar } from "react-icons/ai";
 
 interface PropertyCardProps {
@@ -20,7 +20,6 @@ interface PropertyCardProps {
 
 const PropertyCard = ({
   data,
-  reservation,
   onAction,
   disabled,
   actionLabel,
@@ -32,6 +31,10 @@ const PropertyCard = ({
   const country = location[location?.length - 1];
   const city = location[0];
   const [showImageArrows, setShowImageArrows] = useState(false);
+
+  const isReservationEndDatePast = data.reservations?.map((r) =>
+    isPast(new Date(r!.endDate))
+  );
 
   const rating = data?.reviews?.length
     ? (
@@ -70,33 +73,17 @@ const PropertyCard = ({
     [handleNextImage, handlePrevImage]
   );
 
-  const price = useMemo(() => {
-    if (reservation) {
-      return reservation.totalPrice;
-    }
-
-    return data.price;
-  }, [reservation, data.price]);
-
-  const reservationDate = useMemo(() => {
-    if (!reservation) return null;
-    const start = new Date(reservation.startDate);
-    const end = new Date(reservation.endDate);
-
-    return `${format(start, "PP")} - ${format(end, "PP")}`;
-  }, [reservation]);
-
   return (
     <div
       onClick={() => router.push(`/properties/${data.id}`)}
-      className="col-span-1 cursor-pointer group bg-slate-100"
+      className="col-span-1 cursor-pointer group bg-slate-50 hover:bg-slate-100 transition duration-500 h-full"
     >
-      <div className="flex flex-col gap-2 w-full h-400px">
+      <div className="flex flex-col gap-2 w-full">
         <div
           className="
             aspect-square 
             w-full 
-            h-[300px]
+            h-[270px]
             relative 
             overflow-hidden 
           "
@@ -166,14 +153,15 @@ const PropertyCard = ({
             </div>
           </div>
 
-          <div className="flex flex-row items-center gap-1 -mt-2">
-            <div className="font-semibold">$ {price}</div>
+          <div className="flex flex-row items-center gap-1 ">
+            <div className="font-semibold">$ {data.price}</div>
 
-            {!reservation && <div className="font-light s">night</div>}
+            <div className="font-light">night</div>
           </div>
         </div>
 
-        {onAction && actionLabel && (
+        {/* for myproperties page => checking end date of a reservation is not past. if not, it cannot be cancelled. */}
+        {onAction && actionLabel && !!isReservationEndDatePast.length && (
           <Button
             disabled={disabled}
             small

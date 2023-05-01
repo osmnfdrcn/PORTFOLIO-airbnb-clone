@@ -1,10 +1,7 @@
-import HydrationErrorFix from "@/app/components/base/HydrationErrorFix";
-import NoResult from "@/app/components/ui/property/NoResult";
+import { NoResult } from "@/app/components/ui";
 import getCurrentUser from "@/app/helpers/getCurrentUser";
 import getPropertiesById from "@/app/helpers/getPropertyById";
 import getReservations from "@/app/helpers/getReservations";
-import getReviews from "@/app/helpers/getReviews";
-import { IProperties, IReview } from "@/app/types";
 import PropertyWrapper from "../PropertyWrapper";
 
 interface IParams {

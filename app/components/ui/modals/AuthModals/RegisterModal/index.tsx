@@ -9,9 +9,7 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
-import Button from "../../../../base/Button";
-import Heading from "../../../../base/Heading";
-import FormInput from "../../../../base/inputs/AuthFormTextInput";
+import { Button, Heading, AuthFormTextInput } from "@/app/components/base";
 import AuthModalContainer from "../../ModalContainer";
 import RegisterModalSchema from "./RegisterModalSchema";
 
@@ -57,7 +55,7 @@ const RegisterModal = () => {
         subTitle={"Create an Account"}
         center={true}
       />
-      <FormInput
+      <AuthFormTextInput
         id="email"
         label="Email"
         disabled={isLoading}
@@ -65,7 +63,7 @@ const RegisterModal = () => {
         errors={errors}
         required
       />
-      <FormInput
+      <AuthFormTextInput
         id="name"
         label="Name"
         disabled={isLoading}
@@ -73,7 +71,7 @@ const RegisterModal = () => {
         errors={errors}
         required
       />
-      <FormInput
+      <AuthFormTextInput
         id="password"
         type="password"
         label="Password"
@@ -82,7 +80,7 @@ const RegisterModal = () => {
         errors={errors}
         required
       />
-      <FormInput
+      <AuthFormTextInput
         id="confirmPassword"
         type="password"
         label="Confirm Password"

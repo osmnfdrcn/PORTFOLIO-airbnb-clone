@@ -1,11 +1,11 @@
 import React from "react";
 
-type Props = {
+type CheckboxProps = {
   label: string;
   setAmenityList: any;
 };
 
-const Checkbox = ({ label, setAmenityList }: Props) => {
+const Checkbox = ({ label, setAmenityList }: CheckboxProps) => {
   return (
     <div className="block">
       <div className="mt-2">

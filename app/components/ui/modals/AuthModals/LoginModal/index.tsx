@@ -1,5 +1,6 @@
 "use client";
-import Container from "@/app/components/layout/Container";
+import { AuthFormTextInput, Button, Heading } from "@/app/components/base";
+import { Container } from "@/app/components/layout";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -10,9 +11,6 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
-import Button from "../../../../base/Button";
-import Heading from "../../../../base/Heading";
-import FormInput from "../../../../base/inputs/AuthFormTextInput";
 import AuthModalContainer from "../../ModalContainer";
 import RegisterModalSchema from "./LoginModalSchema";
 
@@ -58,13 +56,13 @@ const LoginModal = () => {
   };
 
   const bodyContent = (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col  gap-4">
       <Heading
         title={"Welcome back"}
         subTitle={"Login to your account"}
         center={true}
       />
-      <FormInput
+      <AuthFormTextInput
         id="email"
         label="Email"
         disabled={isLoading}
@@ -73,7 +71,7 @@ const LoginModal = () => {
         required
       />
 
-      <FormInput
+      <AuthFormTextInput
         id="password"
         type="password"
         label="Password"
@@ -100,21 +98,11 @@ const LoginModal = () => {
         icon={AiFillGithub}
         onClick={() => signIn("github")}
       />
-      <div
-        className="
-          flex items-center justify-center gap-2
-          text-neutral-500 text-center font-light
-          mt-4 
-        "
-      >
+      <div className="flex items-center justify-center gap-2          text-neutral-500 text-center font-light mt-4">
         <div>First time using Airbnb?</div>
         <div
           onClick={onToggle}
-          className="
-              text-neutral-800
-              cursor-pointer 
-              hover:underline
-            "
+          className="text-neutral-800 cursor-pointer hover:underline"
         >
           Create an account!
         </div>

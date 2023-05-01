@@ -7,13 +7,7 @@ const SearchArea = () => {
 
   return (
     <div
-      className="
-        w-full md:w-auto py-2 
-        border-[1px] rounded-full 
-        bg-neutral-50 
-        text-sm text-gray-600
-        shadow-sm hover:shadow-md 
-        transition cursor-pointer"
+      className="w-3/4 md:w-auto py-2 border-[1px] rounded-full         bg-neutral-50 text-sm text-gray-600 shadow-sm hover:shadow-md         transition cursor-pointer"
       onClick={searchModal.onOpen}
     >
       <div className="flex flex-row items-center justify-between">

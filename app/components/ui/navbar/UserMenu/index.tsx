@@ -4,7 +4,6 @@ import useRegisterModal from "@/app/hooks/useRegisterModal";
 import useRentModal from "@/app/hooks/useRentModal";
 import useToggle from "@/app/hooks/useToggle";
 import { IUser } from "@/app/types";
-import { User } from "@prisma/client";
 import { signOut } from "next-auth/react";
 import { useCallback } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
@@ -31,29 +30,16 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
 
   return (
     <div className="relative">
-      <div className="flex flex-row items-center gap-3">
+      <div className="flex flex-row items-center gap-1">
         <div
           onClick={onRent}
-          className="
-            hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
+          className="hidden md:block text-sm font-semibold p-3 rounded-full hover:bg-neutral-100 transition cursor-pointer border items-end"
         >
           Airbnb your home
         </div>
+
         <div
-          className="
-            py-3 px-3 
-            rounded-full 
-            hover:bg-neutral-100 
-            transition cursor-pointer"
-        >
-          <TbWorld size={20} />
-        </div>
-        <div
-          className="
-            p-4 md:py-1 md:px-2
-            border-[1px] rounded-full  border-neutral-200 
-            flex flex-row items-center gap-3 
-            cursor-pointer hover:shadow-md transition"
+          className="p-2 border-[1px] rounded-full  border-neutral-200 flex flex-row items-center gap-3             cursor-pointer hover:shadow-md transition"
           onClick={setIsUserMenuOpen}
         >
           <AiOutlineMenu />
@@ -63,13 +49,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
         </div>
       </div>
       {isUserMenuOpen && (
-        <div
-          className="
-            absolute z-10 right-0 top-12
-            w-[40vw] md:w-3/4 bg-white text-sm
-            rounded-xl shadow-md
-            overflow-hidden"
-        >
+        <div className="absolute z-10 right-0 top-12 w-[40vw] md:w-3/4 bg-white text-sm rounded-xl shadow-md overflow-hidden">
           {currentUser ? (
             <>
               <MenuItem
@@ -88,8 +68,13 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
                 label="My properties"
                 onClick={() => router.push("/myproperties")}
               />
-              <MenuItem label="Airbnb my home" onClick={loginModal.onOpen} />
-              <MenuItem label="Logout" onClick={() => signOut()} />
+              <MenuItem label="Airbnb my home" onClick={rentModal.onOpen} />
+              <MenuItem
+                label="Logout"
+                onClick={() =>
+                  signOut({ callbackUrl: `${window.location.origin}` })
+                }
+              />
             </>
           ) : (
             <>
@@ -113,11 +98,8 @@ interface MenuItemProps {
 export const MenuItem = ({ onClick, label }: MenuItemProps) => {
   return (
     <div
-      className="px-4 py-3 
-      hover:bg-neutral-100 
-      cursor-pointer
-      transition
-      font-semibold"
+      className="px-4 py-3 hover:bg-neutral-100 cursor-pointer
+      transition font-semibold"
       onClick={onClick}
     >
       {label}

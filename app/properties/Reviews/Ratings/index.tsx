@@ -11,7 +11,7 @@ const Ratings = ({ reviews }: Props) => {
   const ratingItems = cumulativeRatings.map((rating) => {
     return {
       style: { width: `${rating.value * 10}%` },
-      item: rating.value,
+      item: rating.value || "No any review yet",
       text: rating.title,
     };
   });

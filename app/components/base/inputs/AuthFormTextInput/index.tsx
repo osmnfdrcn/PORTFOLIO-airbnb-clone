@@ -12,18 +12,16 @@ interface AuthFormTextInputProps {
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
 }
-const AuthFormTextInput = (props: AuthFormTextInputProps) => {
-  const {
-    id,
-    label,
-    type = "text",
-    disabled = false,
-    formatPrice = false,
-    required = false,
-    register,
-    errors,
-  } = props;
-
+const AuthFormTextInput = ({
+  id,
+  label,
+  type = "text",
+  disabled = false,
+  formatPrice = false,
+  required = false,
+  register,
+  errors,
+}: AuthFormTextInputProps) => {
   return (
     <div className="w-full relative">
       {formatPrice && (
@@ -38,27 +36,15 @@ const AuthFormTextInput = (props: AuthFormTextInputProps) => {
         {...register(id, { required })}
         placeholder=" "
         type={type}
-        className={`
-          w-full p-4 pt-6 
-          bg-white  font-light 
-          border-2 rounded-md outline-none
-          transition
-          disabled:opacity-70 disabled:cursor-not-allowed
-          peer
+        className={`w-full p-4 pt-6 bg-white  font-light border-2 rounded-md outline-none transition disabled:opacity-70 disabled:cursor-not-allowed peer
           ${formatPrice ? "pl-9" : "pl-4"}
           ${errors[id] ? "border-rose-500" : "border-neutral-300"}
           ${errors[id] ? "focus:border-rose-500" : "focus:border-black"}
         `}
       />
       <label
-        className={`
-          absolute top-5 z-10 
-          text-md
-          transform -translate-y-3 origin-[0] duration-150 
-          peer-placeholder-shown:scale-100 
-          peer-placeholder-shown:translate-y-0 
-          peer-focus:scale-75
-          peer-focus:-translate-y-4
+        className={`absolute top-5 z-10 text-md transform -translate-y-3 origin-[0] duration-150 peer-placeholder-shown:scale-100           peer-placeholder-shown:translate-y-0 peer-focus:scale-75
+          peer-focus:-translate-y-4 
           ${formatPrice ? "left-9" : "left-4"}
           ${errors[id] ? "text-rose-500" : "text-zinc-400"}
         `}

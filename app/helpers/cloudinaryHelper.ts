@@ -13,8 +13,6 @@ export const makeUploadRequest = ({
 
   const formData = new FormData();
   formData.append(fieldName, file);
-  console.log({ file });
-
   formData.append("upload_preset", uploadPreset);
   const request = new XMLHttpRequest();
   request.open("POST", url);

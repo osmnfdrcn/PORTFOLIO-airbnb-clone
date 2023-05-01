@@ -1,18 +1,21 @@
 import "./globals.css";
-import { Nunito } from "next/font/google";
-import Navbar from "./components/ui/navbar";
-import RegisterModal from "./components/ui/modals/AuthModals/RegisterModal";
+import { Montserrat, Nunito } from "next/font/google";
 import NotificationProvider from "./providers/NotificationProvider";
-import LoginModal from "./components/ui/modals/AuthModals/LoginModal";
-import AirbnbYourHomeModal from "./components/ui/modals/AirbnbYourHomeModal";
 import getCurrentUser from "./helpers/getCurrentUser";
-import SearchModal from "./components/ui/modals/SearchModal";
-import ReviewModal from "./properties/ReviewModal";
+import {
+  LoginModal,
+  RegisterModal,
+  SearchModal,
+  AirbnbYourHomeModal,
+  Navbar,
+} from "@/app/components/ui";
+
 export const metadata = {
   title: "AIRBNB CLONE",
   description: "An AIRBNB Clone",
 };
 const font = Nunito({
+  weight: "300",
   subsets: ["latin"],
 });
 

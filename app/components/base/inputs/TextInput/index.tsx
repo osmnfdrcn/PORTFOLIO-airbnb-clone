@@ -26,11 +26,7 @@ const TextInput = ({
         />
       )}
       <input
-        className="
-          w-full p-2.5 px-9
-        bg-white  font-light 
-          border-2 rounded-md outline-none
-        "
+        className="w-full p-2.5 px-9 bg-white  font-light border-2 rounded-md  outline-none"
         type={type}
         onChange={onChange}
         required={required}

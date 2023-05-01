@@ -1,5 +1,4 @@
 "use client";
-
 import { CldUploadWidget } from "next-cloudinary";
 import Image from "next/image";
 import { useCallback, useState } from "react";
@@ -21,8 +20,9 @@ const ImageUpload = ({ onChange, value }: ImageUploadProps) => {
 
   const handleUpload = useCallback(
     (result: any) => {
-      setImages([...images, result.info.secure_url]);
-      onChange(images);
+      const updatedImages = [...images, result.info.secure_url];
+      setImages(updatedImages);
+      onChange(updatedImages);
     },
     [onChange, images]
   );
@@ -40,35 +40,17 @@ const ImageUpload = ({ onChange, value }: ImageUploadProps) => {
         return (
           <div
             onClick={() => open?.()}
-            className="
-              relative
-              cursor-pointer
-              hover:opacity-70
-              transition
-              border-dashed
-              border-2
-              p-20
-              border-neutral-300
-              flex
-              flex-col
-              justify-center
-              items-center
-              gap-4
-              text-neutral-600
-            "
+            className="relative cursor-pointer hover:opacity-70             transition border-dashed border-2 p-20              border-neutral-300 flex flex-col justify-center               items-center gap-4 text-neutral-600"
           >
             <TbPhotoPlus size={50} />
             <div className="font-semibold text-lg">Click to upload</div>
             {value && (
-              <div
-                className="
-              absolute inset-0 w-full h-full"
-              >
+              <div className="absolute inset-0 w-full h-full">
                 <Image
                   fill
                   style={{ objectFit: "cover" }}
-                  src={value[0]}
-                  alt="House"
+                  src={value[0] || "/images/imageUpload.png"}
+                  alt=""
                 />
               </div>
             )}

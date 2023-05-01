@@ -2,11 +2,11 @@
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-import { IProperties } from "@/app/types";
 import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
-import { popupContent, popupHead, popupText, price } from "./popupStyles";
-import "./Test.css";
+import { IProperties } from "@/app/types";
+import { content, title, description, price } from "./popupStyles";
+import "./Cluster.css";
 
 interface MapProps {
   center?: number[];
@@ -44,7 +44,7 @@ const Map = ({ center, locations, properties }: MapProps) => {
   return (
     <MapContainer
       center={center as L.LatLngExpression}
-      zoom={center ? 10 : 7}
+      zoom={center ? 5 : 7}
       scrollWheelZoom={false}
       className="h-full rounded-lg"
     >
@@ -61,18 +61,16 @@ const Map = ({ center, locations, properties }: MapProps) => {
           key={uuidv4()}
         >
           <Popup className="request-popup">
-            <div className="cursor-pointer" style={popupContent as any}>
-              <div
-                className="m-2"
-                style={popupHead}
-                onClick={() => onClick(l.propertyId)}
-              >
-                {l.title}
+            <div
+              className="cursor-pointer flex flex-col items-center justify-center gap-1 "
+              style={content as any}
+              onClick={() => onClick(l.propertyId)}
+            >
+              <div style={title}>{l.title}</div>
+              <div className="text-justify" style={description}>
+                {l.description}
               </div>
-              <span style={popupText}>{l.description}</span>
-              <div className="m-2" style={price}>
-                ${l.price}
-              </div>
+              <div style={price}>${l.price}</div>
             </div>
           </Popup>
         </Marker>

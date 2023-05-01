@@ -1,40 +1,13 @@
-import React from "react";
-import Container from "./components/layout/Container";
+"use client";
 
-type Props = {};
+import { PuffLoader } from "react-spinners";
 
-const Loading = (props: Props) => {
+const Loader = () => {
   return (
-    <Container>
-      <div
-        className="bg-gray grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 
-      lg:grid-cols-4 xl:grid-cols-5 gap-8"
-      >
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
-          <div className="flex flex-col " key={num}>
-            <div
-              className="animate-pulse bg-neutral-200 w-70 h-72  rounded overflow-hidden border cursor-pointer"
-              key={num}
-            >
-              {" "}
-            </div>
-            <div
-              className="animate-pulse bg-neutral-200 w-70 h-3 mt-2 rounded overflow-hidden border cursor-pointer"
-              key={num}
-            >
-              {" "}
-            </div>
-            <div
-              className="animate-pulse bg-neutral-200 w-70 h-3 mt-2 rounded overflow-hidden border cursor-pointer"
-              key={num}
-            >
-              {" "}
-            </div>
-          </div>
-        ))}
-      </div>
-    </Container>
+    <div className="h-[70vh] flex flex-col justify-center items-center ">
+      <PuffLoader size={100} color="red" />
+    </div>
   );
 };
 
-export default Loading;
+export default Loader;

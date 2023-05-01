@@ -1,12 +1,9 @@
 "use client";
-import dynamic from "next/dynamic";
-import { IconType } from "react-icons";
-import { IReview, IUser } from "@/app/types";
-import PropertyCategory from "../PropertyCategory";
 import { Avatar } from "@/app/components/base";
-import Reviews from "../Reviews";
+import { IReview, IUser } from "@/app/types";
+import dynamic from "next/dynamic";
 import { v4 as uuidv4 } from "uuid";
-import Ratings from "../Reviews/Ratings";
+import PropertyCategory from "../PropertyCategory";
 const Map = dynamic(
   () => import("../../components/ui/modals/AirbnbYourHomeModal/Map"),
   {
@@ -37,7 +34,6 @@ interface PropertyInfoProps {
 }
 
 const PropertyInfo = ({
-  propertyId,
   isYourProperty,
   user,
   description,
@@ -46,37 +42,18 @@ const PropertyInfo = ({
   bathroomCount,
   categories,
   coordinates,
-  reviews,
 }: PropertyInfoProps) => {
   return (
     <div className="col-span-4 flex flex-col gap-8">
       <div className="flex flex-col gap-2">
-        <div
-          className="
-            text-xl 
-            font-semibold 
-            flex 
-            flex-row 
-            items-center
-            gap-2
-          "
-        >
+        <div className="text-xl font-semibold flex flex-row items-center       gap-2">
           <div>Hosted by {isYourProperty ? "You" : user?.name} </div>
           <Avatar image={user?.image} />
         </div>
-        <div
-          className="
-            flex 
-            flex-row 
-            items-center 
-            gap-4 
-            font-light
-            text-neutral-500
-          "
-        >
-          <div>{guestCount} guests</div>
-          <div>{roomCount} rooms</div>
-          <div>{bathroomCount} bathrooms</div>
+        <div className="flex flex-row items-center gap-4 font-light            text-neutral-500">
+          <p>{guestCount} guests</p>
+          <p>{roomCount} rooms</p>
+          <p>{bathroomCount} bathrooms</p>
         </div>
       </div>
       <hr />
@@ -91,12 +68,7 @@ const PropertyInfo = ({
         );
       })}
       <hr />
-      <div
-        className="
-      text-lg font-light text-neutral-500"
-      >
-        {description}
-      </div>
+      <div className="text-lg font-light text-neutral-500">{description}</div>
       <hr />
 
       <Map center={coordinates} />

@@ -22,6 +22,12 @@ export async function DELETE(
     throw new Error("Invalid ID");
   }
 
+  const review = await prisma.review.deleteMany({
+    where: {
+      propertyId,
+    },
+  });
+
   const properties = await prisma.properties.deleteMany({
     where: {
       id: propertyId,

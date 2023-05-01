@@ -6,8 +6,7 @@ type HeadingProps = {
   smallTitle?: boolean;
 };
 
-const Heading = (props: HeadingProps) => {
-  const { title, subTitle, center, smallTitle } = props;
+const Heading = ({ title, subTitle, center, smallTitle }: HeadingProps) => {
   return (
     <div className={center ? "text-center" : "text-start"}>
       <div

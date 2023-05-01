@@ -1,6 +1,6 @@
 import getCurrentUser from "@/app/helpers/getCurrentUser";
 import getProperties from "@/app/helpers/getProperties";
-import NoResult from "../components/ui/property/NoResult";
+import { NoResult } from "../components/ui";
 
 import MyPropertiesWrapper from "./MyPropertiesWrapper";
 

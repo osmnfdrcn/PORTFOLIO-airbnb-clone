@@ -1,6 +1,6 @@
 import getCurrentUser from "@/app/helpers/getCurrentUser";
 import getReservations from "@/app/helpers/getReservations";
-import NoResult from "../components/ui/property/NoResult";
+import { NoResult } from "../components/ui";
 import TripsWrapper from "./TripsWrapper";
 
 const TripsPage = async () => {

@@ -1,9 +1,7 @@
 "use client";
-import { Heading } from "@/app/components/base";
-import React, { useState } from "react";
 import { Rating } from "react-simple-star-rating";
 type Props = {
-  handleRating: (value: number) => void;
+  handleRating?: (value: number) => void;
   rating: number;
 };
 

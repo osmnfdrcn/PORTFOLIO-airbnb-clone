@@ -1,6 +1,5 @@
 "use client";
 
-import useCountries from "@/app/hooks/useCountries";
 import Select from "react-select";
 
 export type LocationSelectValue = {
@@ -17,14 +16,11 @@ interface LocationSelectProps {
 }
 
 const LocationSelect = ({ value, onChange }: LocationSelectProps) => {
-  const { getAll } = useCountries();
-
   return (
     <div>
       <Select
         placeholder="Anywhere"
         isClearable
-        options={getAll()}
         value={value}
         onChange={(value) => onChange(value as LocationSelectValue)}
         formatOptionLabel={(option: any) => (

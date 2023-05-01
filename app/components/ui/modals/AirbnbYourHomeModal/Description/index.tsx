@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button, TextInput } from "@/app/components/base";
 import Heading from "@/app/components/base/Heading";
 import { AirbnbYourHomeModalComponentsProps } from "..";

@@ -1,5 +1,4 @@
 import { Button, Heading, ImageUpload } from "@/app/components/base";
-import { useState } from "react";
 import { AirbnbYourHomeModalComponentsProps } from "..";
 
 const PropertyImage = ({
@@ -10,6 +9,7 @@ const PropertyImage = ({
 }: AirbnbYourHomeModalComponentsProps) => {
   const handleBackClick = () => handleStep(--step);
   const handleNextClick = () => handleStep(++step);
+
   return (
     <div className="flex flex-col gap-8">
       <Heading
@@ -22,11 +22,6 @@ const PropertyImage = ({
         }}
         value={data?.imageSrc}
       />
-      {/* <div className={`flex flex-row w-1/${images?.length}`}>
-        {images?.map((i) => (
-          <img src={i} alt={i} />
-        ))}
-      </div> */}
 
       <div className="flex flex-col gap-2 p-6">
         <div className="flex flex-row items-center w-full gap-4">
@@ -34,7 +29,7 @@ const PropertyImage = ({
           <Button
             text="Next"
             onClick={handleNextClick}
-            disabled={!data?.imageSrc}
+            disabled={!data?.imageSrc.length}
           />
         </div>
       </div>

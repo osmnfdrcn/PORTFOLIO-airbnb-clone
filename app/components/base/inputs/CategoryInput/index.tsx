@@ -7,8 +7,13 @@ type CategoryInputProps = {
   image: string;
 };
 
-function CategoryInput(props: CategoryInputProps) {
-  const { onClick, label, selected, category, image } = props;
+function CategoryInput({
+  onClick,
+  label,
+  selected,
+  category,
+  image,
+}: CategoryInputProps) {
   let selectedCategories = category;
   return (
     <div
@@ -18,13 +23,8 @@ function CategoryInput(props: CategoryInputProps) {
           : selectedCategories.push(label);
         onClick(selectedCategories);
       }}
-      className={`}
-        flex item-center justify-start gap-2
-        border-2 rounded-xl hover:border-rose-500
-        p-4
-        transition cursor-pointer
-        ${selected ? "bg-rose-300" : "border-neutral-200"}
-    `}
+      className={`flex item-center justify-start gap-2 border-2 rounded-xl hover:border-rose-500 p-4 transition cursor-pointer
+        ${selected ? "bg-rose-300" : "border-neutral-200"}`}
     >
       <Image src={image} width={24} height={24} alt={label} />
       <span className="text-gray-500 text-sm">{label}</span>

@@ -63,6 +63,7 @@ export default async function getProperties(params: IPropertiesParams) {
       },
       include: {
         reviews: true,
+        reservations: true,
       },
     });
 

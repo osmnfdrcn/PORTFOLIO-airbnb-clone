@@ -11,25 +11,23 @@ interface ButtonProps {
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-function Button(props: ButtonProps) {
-  const { text, disabled, outline, small, narrow, icon: Icon, onClick } = props;
+function Button({
+  text,
+  disabled,
+  outline,
+  small,
+  icon: Icon,
+  onClick,
+}: ButtonProps) {
   return (
     <button
-      className={`
-        relative 
-        flex items-center justify-around 
-        w-full 
-        rounded-lg 
-        disabled:opacity-70 disabled:cursor-not-allowed 
-        hover:opacity-80 
-        bg-gradient-to-r from-pink-400 to-rose-600
-        transition} 
+      className={`relative flex items-center justify-around w-full 
+        p-1 disabled:opacity-70 disabled:cursor-not-allowed         hover:opacity-80 transition} 
         ${
           outline
             ? "bg-neutral-100 border-black text-black"
             : "bg-rose-500 border-rose-500 text-white"
         }
-        ${narrow && "bg-green-400 text-white w-[100px]"}
         ${
           small
             ? "py-1 text-sm font-light border-[1px]"

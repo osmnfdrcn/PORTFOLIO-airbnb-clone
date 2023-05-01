@@ -34,6 +34,7 @@ import { IReservation } from "@/app/types";
 import { format, parseISO } from "date-fns";
 import ModalContainer from "../../components/ui/modals/ModalContainer";
 import RatingStars from "./RatingStars";
+import { Rating } from "react-simple-star-rating";
 
 const ReviewModal = ({ propertyId, reservations }: Props) => {
   const reviewModal = useReviewModal();
@@ -45,8 +46,15 @@ const ReviewModal = ({ propertyId, reservations }: Props) => {
     setReviewValues(INITIAL_VALUES);
   };
 
-  const { cleanliness, location, value, checkIn, communication, accuracy } =
-    reviewValues;
+  const {
+    cleanliness,
+    location,
+    value,
+    checkIn,
+    communication,
+    accuracy,
+    reviewText,
+  } = reviewValues;
   const cumulativeRating = +(
     (cleanliness + location + value + checkIn + communication + accuracy) /
     6
@@ -60,7 +68,8 @@ const ReviewModal = ({ propertyId, reservations }: Props) => {
     !value ||
     !checkIn ||
     !accuracy ||
-    !reservationId;
+    !reservationId ||
+    !reviewText;
 
   const handleClose = () => {
     reviewModal.onClose();
@@ -142,9 +151,9 @@ const ReviewModal = ({ propertyId, reservations }: Props) => {
           {reservations?.map((r) => {
             return (
               <option value={r.id} className="text-lg " key={uuidv4()}>
-                {format(parseISO(r.startDate), "yyyy/MMMM/dd")}
+                {format(parseISO(r.startDate), "PP")}
                 {" - "}
-                {format(parseISO(r.endDate), "yyyy/MMMM/dd")}
+                {format(parseISO(r.endDate), "PP")}
               </option>
             );
           })}
@@ -152,11 +161,15 @@ const ReviewModal = ({ propertyId, reservations }: Props) => {
       </div>
       {/* rating section */}
       <div className="flex rounded-lg border border-solid border-gray-300 bg-white w-full">
-        <div className="flex-col gap-1 mb-1  p-2 w-4/5">
+        <div className="flex-col gap-1 mb-1 p-2 w-4/5">
           {ratingSteps.map((item) => {
             return (
-              <div className="flex items-center justify-center w-full">
+              <div
+                className="flex items-center justify-center w-full"
+                key={uuidv4()}
+              >
                 <p className="w-2/6 text-sm font-extra-light">{item.text}</p>
+
                 <RatingStars
                   handleRating={item.handleRating}
                   rating={item.rating}

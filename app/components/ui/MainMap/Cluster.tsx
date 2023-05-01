@@ -1,12 +1,10 @@
 "use client";
-import { useMap } from "react-leaflet";
-
-import { IProperties } from "@/app/types";
+import { useCallback, useEffect, useState } from "react";
+import { useMap, Marker } from "react-leaflet";
 import L from "leaflet";
-import React, { useCallback, useState } from "react";
-import { Marker } from "react-leaflet";
 import useSupercluster from "use-supercluster";
 import "./Cluster.css";
+import { IProperties } from "@/app/types";
 
 const icons: { [key: number]: L.DivIcon } = {};
 const fetchIcon = (count: number, size: number) => {
@@ -49,18 +47,21 @@ const Cluster = ({ locations, properties }: Props) => {
 
   const onMove = useCallback(() => {
     updateMap();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [map]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     updateMap();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [map]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     updateMap();
     map.on("move", onMove);
     return () => {
       map.off("move", onMove);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [map]);
 
   const points = properties.map((p: IProperties) => ({
@@ -78,9 +79,6 @@ const Cluster = ({ locations, properties }: Props) => {
     zoom: map.getZoom(),
     options: { radius: 50, maxZoom: 15 },
   });
-
-  const onClick = (idx: any) => console.log(idx);
-  console.log(clusters);
 
   return (
     <>
@@ -122,9 +120,6 @@ const Cluster = ({ locations, properties }: Props) => {
               iconSize: [28, 28],
               iconAnchor: [14, 14],
             })}
-            eventHandlers={{
-              click: () => onClick(cluster.properties.propertyId),
-            }}
           />
         );
       })}

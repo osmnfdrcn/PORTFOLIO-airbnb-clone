@@ -91,11 +91,8 @@ const Locations = ({
       </div>
 
       <div
-        className={`
-          absolute top-0 left-0 right-0 z-10 
-          flex flex-col gap-4  
-          bg-white px-8 text-sm text-neutral-400 
-          ${listPlace.length ? "h-full " : null} `}
+        className={`absolute top-0 left-0 right-0 z-10 flex flex-col gap-4     bg-white px-8 text-sm text-neutral-400 
+        ${listPlace.length ? "h-full " : null} `}
       >
         {listPlace.length ? (
           <div

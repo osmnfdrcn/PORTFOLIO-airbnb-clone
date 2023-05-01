@@ -12,7 +12,9 @@ const Price = ({
 
   const handleBackClick = () => handleStep(--step);
 
-  const isCreateButtonDisabled = !title || !description;
+  const isCreateButtonDisabled = !data?.price;
+  console.log(!!data?.price);
+
   return (
     <div className="flex flex-col gap-8">
       <>

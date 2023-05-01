@@ -39,7 +39,7 @@ const INITIAL_STATE = {
   roomCount: 1,
   bathroomCount: 1,
   imageSrc: [],
-  price: 1,
+  price: 0,
   title: "",
   description: "",
 };

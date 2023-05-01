@@ -5,16 +5,10 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { Range } from "react-date-range";
 import { useRouter } from "next/navigation";
-import {
-  differenceInDays,
-  eachDayOfInterval,
-  isFuture,
-  isPast,
-} from "date-fns";
+import { differenceInDays, eachDayOfInterval, isPast } from "date-fns";
 
 import useLoginModal from "@/app/hooks/useLoginModal";
 import { IProperties, IReservation, IReview, IUser } from "@/app/types";
-import Container from "@/app/components/layout/Container";
 import { categoryList } from "@/app/config/categoryList";
 import PropertyHead from "../PropertyHead";
 import PropertyInfo from "../PropertyInfo";
@@ -22,7 +16,7 @@ import PropertyReservation from "../PropertyReservation";
 import useReviewModal from "@/app/hooks/useReviewModal";
 import Reviews from "../Reviews";
 import ReviewModal from "../ReviewModal";
-import { Button, Heading } from "@/app/components/base";
+import { Container } from "@/app/components/layout";
 
 const initialDateRange = {
   startDate: new Date(),
@@ -78,7 +72,6 @@ const PropertyWrapper = ({
   const usersAllReservationsOnProperty = reservations?.filter(
     (r) => r.userId === currentUser?.id
   );
-  console.log({ usersAllReservationsOnProperty });
 
   const reservationsCanBeLeftReview = usersAllReservationsOnProperty.filter(
     (r) => !r.review && isPast(new Date(r.startDate))
@@ -108,6 +101,7 @@ const PropertyWrapper = ({
       .then(() => {
         toast.success("Property reserved!");
         setDateRange(initialDateRange);
+        router.refresh();
         router.push("/trips");
       })
       .catch(() => {
@@ -157,19 +151,20 @@ const PropertyWrapper = ({
   //----STICKY COMPONENT-RESERVATIONS-----
 
   return (
-    <Container>
+    <Container noCategories>
       <div
         className="
           max-w-screen-lg 
           mx-auto
         "
       >
-        <div className="flex flex-col gap-6 relative -top-24">
+        <div className="flex flex-col gap-6 relative">
           <PropertyHead
             title={property.title}
             imageSrc={property.imageSrc}
             locationValue={property.locationValue}
             id={property.id}
+            propertyOwnerId={property.userId}
             currentUser={currentUser}
           />
           {/* PROPERTY INFO SECTION */}
@@ -199,13 +194,7 @@ const PropertyWrapper = ({
             {/* RESERVATION SECTION */}
             <div
               id="reservation-component"
-              className="
-                sticky
-                order-first 
-                mb-10 
-                md:order-last 
-                md:col-span-3
-              "
+              className="sticky order-first mb-10 md:order-last               md:col-span-3"
             >
               <PropertyReservation
                 price={property.price}
@@ -228,6 +217,7 @@ const PropertyWrapper = ({
               propertyId={property.id}
               reviews={property.reviews}
               userCanLeaveReview={!!userCanLeaveReview}
+              showLeaveReviewButton={!!currentUser}
             />
           </div>
         </div>

@@ -5,12 +5,10 @@ import axios from "axios";
 import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
-
 import { IReservation, IUser } from "@/app/types";
-
 import { Heading } from "@/app/components/base";
-import PropertyCard from "@/app/components/ui/property/PropertyCard";
-import Container from "@/app/components/layout/Container";
+import { Container } from "@/app/components/layout/";
+import { ReservationCard } from "@/app/components/ui";
 
 interface TripsWrapperProps {
   reservations: IReservation[];
@@ -20,10 +18,6 @@ interface TripsWrapperProps {
 const TripsWrapper = ({ reservations, currentUser }: TripsWrapperProps) => {
   const router = useRouter();
   const [deletingId, setDeletingId] = useState("");
-
-  // const date = new Date();
-  // const dayCount2 = differenceInDays(dateRange.endDate!, date);
-  // console.log({ dayCount2 });
 
   const onCancel = useCallback(
     (id: string) => {
@@ -46,27 +40,14 @@ const TripsWrapper = ({ reservations, currentUser }: TripsWrapperProps) => {
   );
 
   return (
-    <Container>
+    <Container noCategories>
       <Heading
         title="Trips"
         subTitle="Where you've been and where you're going"
       />
-      <div
-        className="
-          mt-10
-          grid 
-          grid-cols-1 
-          sm:grid-cols-2 
-          md:grid-cols-3 
-          lg:grid-cols-4
-          xl:grid-cols-5
-          2xl:grid-cols-6
-          gap-8
-        "
-      >
+      <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
         {reservations?.map((reservation: any) => (
-          //  cancel islemi yapilabilir mi burada kontrol edileck
-          <PropertyCard
+          <ReservationCard
             key={uuidv4()}
             data={reservation.property}
             reservation={reservation}
@@ -74,7 +55,7 @@ const TripsWrapper = ({ reservations, currentUser }: TripsWrapperProps) => {
             onAction={onCancel}
             disabled={deletingId === reservation.id}
             actionLabel="Cancel reservation"
-            currentUser={currentUser}
+            currentUserId={currentUser?.id}
           />
         ))}
       </div>

@@ -103,6 +103,7 @@ const SearchModal = () => {
     );
     handleClose();
     router.push(url);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     step,
     searchModal,
@@ -218,7 +219,7 @@ const SearchModal = () => {
       <div className="flex flex-col gap-8">
         <Heading title="Maximum price per night?" />
         <div className="flex gap-1">
-          <div className="w-full ">
+          <div className="w-full">
             <TextInput
               type="number"
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {

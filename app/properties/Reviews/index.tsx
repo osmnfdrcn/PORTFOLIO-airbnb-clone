@@ -10,21 +10,29 @@ type Props = {
   propertyId: string;
   reviews?: IReview[] | null;
   userCanLeaveReview: boolean;
+  showLeaveReviewButton: boolean;
 };
 
-const Reviews = ({ propertyId, reviews, userCanLeaveReview }: Props) => {
+const Reviews = ({
+  reviews,
+  userCanLeaveReview,
+  showLeaveReviewButton,
+}: Props) => {
   const reviewModal = useReviewModal();
   return (
     <div className="flex flex-col gap-8 p-8">
       <Heading title="Reviews and Ratings" />
-      <div className=" flex float-right w-1/5 absolute top-2 right-2">
-        <Button
-          text="Leave a Review"
-          small
-          onClick={reviewModal.onOpen}
-          disabled={!userCanLeaveReview}
-        />
-      </div>
+      {showLeaveReviewButton ? (
+        <div className=" flex float-right w-1/5 absolute top-2 right-2">
+          <Button
+            text="Leave a Review"
+            small
+            onClick={reviewModal.onOpen}
+            disabled={!userCanLeaveReview}
+          />
+        </div>
+      ) : null}
+
       <Ratings reviews={reviews as IReview[]} />
       <ListReview reviews={reviews} />
     </div>

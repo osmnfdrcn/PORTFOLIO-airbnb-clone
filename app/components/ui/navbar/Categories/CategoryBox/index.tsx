@@ -35,12 +35,7 @@ const CategoryBox = ({ image, label, selected }: CategoryBoxProps) => {
   return (
     <div
       onClick={handleClick}
-      className={`
-        flex flex-col items-center justify-center gap-1
-        px-3 pb-2 border-b-2
-        hover:text-neutral-800
-        transition
-        cursor-pointer
+      className={`flex flex-col items-center justify-start flex-1 gap-1         px-3 pb-2 border-b-2 hover:text-neutral-800 transition        cursor-pointer
         ${selected ? "border-b-neutral-800" : "border-transparent"}
         ${selected ? "text-neutral-800" : "text-neutral-500"}
       `}
