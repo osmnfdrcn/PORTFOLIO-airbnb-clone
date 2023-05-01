@@ -24,10 +24,12 @@ To run this project, you will need to add the following environment variables to
 ## Screenshots
 
 ![Screenshot](/screenshots/home.png)
-![Screenshot](/screenshots/home-sm.png)
+![Screenshot](/screenshots/home-mobile.png)
 ![Screenshot](/screenshots/property-page.png)
+![Screenshot](/screenshots/property-page-mobile.png)
 ![Screenshot](/screenshots/reservations-page.png)
 ![Screenshot](/screenshots/review.png)
 ![Screenshot](/screenshots/airbnbyourhomemodal.png)
 ![Screenshot](/screenshots/airbnbyourhomemodal-map.png)
 ![Screenshot](/screenshots/login.png)
+![Screenshot](/screenshots/register.png)

@@ -83,20 +83,3 @@ export async function POST(request: Request) {
 
   return NextResponse.json(property);
 }
-
-// console.log("props", property);
-// {
-//   id: '643dc46d93c300051649deb8',
-//   title: 'HBO ADANA',
-//   description: 'HBO ADANA',
-//   imageSrc: 'https://res.cloudinary.com/dx9edul8i/image/upload/v1681769561/b1bdzrfedgjfrtossmsi.webp',
-//   createdAt: 2023-04-17T22:13:01.048Z,
-//   categories: [ 'Windmills', 'Pools' ],
-//   roomCount: 1,
-//   bathroomCount: 1,
-//   guestCount: 1,
-//   locationValue: 'Ankara, Hipodrom Caddesi, Hacı Bayram Mahallesi, Altındağ, Ankara, Central Anatolia Region, 06630, Turkey',
-//   coordinates: [ 39.9357254, 32.8434356 ],
-//   userId: '642b7f3e48d4cbdccb82d563',
-//   price: 100
-// }
