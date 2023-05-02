@@ -109,13 +109,7 @@ const LoginModal = () => {
       </div>
     </div>
   );
-  if (isLoading) {
-    return (
-      <Container>
-        <div className="mt-[200px]">Loading...</div>
-      </Container>
-    );
-  }
+
   return (
     <AuthModalContainer
       disabled={isLoading}
