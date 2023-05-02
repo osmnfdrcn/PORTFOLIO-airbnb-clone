@@ -48,6 +48,8 @@ export async function POST(request: Request) {
     return NextResponse.error();
   }
   const { reviewValues, cumulativeRating, propertyId, reservationId } = body;
+  console.log({ body });
+  console.log({ currentUser });
 
   const {
     cleanliness,

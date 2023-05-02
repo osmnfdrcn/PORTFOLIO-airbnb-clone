@@ -34,7 +34,6 @@ import { IReservation } from "@/app/types";
 import { format, parseISO } from "date-fns";
 import ModalContainer from "../../components/ui/modals/ModalContainer";
 import RatingStars from "./RatingStars";
-import { Rating } from "react-simple-star-rating";
 
 const ReviewModal = ({ propertyId, reservations }: Props) => {
   const reviewModal = useReviewModal();
@@ -68,8 +67,7 @@ const ReviewModal = ({ propertyId, reservations }: Props) => {
     !value ||
     !checkIn ||
     !accuracy ||
-    !reservationId ||
-    !reviewText;
+    !reservationId;
 
   const handleClose = () => {
     reviewModal.onClose();

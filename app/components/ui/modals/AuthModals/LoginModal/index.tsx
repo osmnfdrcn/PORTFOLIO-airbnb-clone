@@ -65,7 +65,7 @@ const LoginModal = () => {
       <AuthFormTextInput
         id="email"
         label="Email"
-        disabled={isLoading}
+        disabled={true}
         register={register}
         errors={errors}
         required
@@ -75,7 +75,7 @@ const LoginModal = () => {
         id="password"
         type="password"
         label="Password"
-        disabled={isLoading}
+        disabled={true}
         register={register}
         errors={errors}
         required
