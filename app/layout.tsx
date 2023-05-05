@@ -15,7 +15,7 @@ export const metadata = {
   description: "An AIRBNB Clone",
 };
 const font = Nunito({
-  weight: "300",
+  weight: "400",
   subsets: ["latin"],
 });
 
